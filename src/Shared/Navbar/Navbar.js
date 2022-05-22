@@ -28,11 +28,11 @@ const Navbar = () => {
               class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>Item 1</a>
+                <NavLink to="/">Home</NavLink>
               </li>
 
               <li>
-                <a>Item 3</a>
+                <NavLink to="/blogs">Blogs</NavLink>
               </li>
             </ul>
           </div>
@@ -47,7 +47,7 @@ const Navbar = () => {
             </li>
 
             <li>
-              <NavLink to="/">Item 3</NavLink>
+              <NavLink to="/blogs">Blogs</NavLink>
             </li>
           </ul>
         </div>
