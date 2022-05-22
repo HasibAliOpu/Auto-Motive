@@ -1,8 +1,16 @@
 import React from "react";
 
 const Part = ({ part }) => {
-  const { img, name, description, price, availableQuantity, minimumQuantity } =
-    part;
+  const {
+    _id,
+    img,
+    name,
+    description,
+    price,
+    availableQuantity,
+    minimumQuantity,
+  } = part;
+  console.log(_id);
   return (
     <div className="card card-compact max-w-md bg-base-100 shadow-xl">
       <figure>
