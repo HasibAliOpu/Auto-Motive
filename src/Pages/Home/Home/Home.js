@@ -4,15 +4,17 @@ import BasicInfo from "../BasicInfo/BasicInfo";
 import BusinessSummary from "../BusinessSummary/BusinessSummary";
 import ClientReview from "../ClientReview/ClientReview";
 import Discount from "../Discount/Discount";
+import Parts from "../Parts/Parts";
 
 const Home = () => {
   return (
     <div>
       <Banner />
       <BasicInfo />
-      <ClientReview />
+      <Parts />
       <BusinessSummary />
       <Discount />
+      <ClientReview />
     </div>
   );
 };
