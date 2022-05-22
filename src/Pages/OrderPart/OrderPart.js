@@ -19,11 +19,23 @@ const OrderPart = () => {
     })();
   }, [id]);
 
-  const onSubmit = (data) => {
-    if (data?.quantity > part?.availableQuantity) {
+  const onSubmit = async (data) => {
+    let quantity = data.quantity;
+    if (quantity > part?.availableQuantity) {
       return alert("out of stock");
     }
-    console.log(data);
+    quantity = part?.availableQuantity - quantity;
+    const newQuantity = { availableQuantity: quantity };
+
+    const { data: newAvailableQ } = await axios.put(
+      `http://localhost:5000/parts/${id}`,
+      newQuantity
+    );
+
+    if (newAvailableQ.modifiedCount > 0) {
+      alert("your order ar booked");
+    }
+    console.log(newAvailableQ);
   };
 
   return (
@@ -32,10 +44,13 @@ const OrderPart = () => {
         <div className="text-center lg:text-left">
           <img
             src={part?.img}
-            className="max-w-sm rounded-lg shadow-2xl"
+            className="max-w-sm  mx-auto my-5 rounded-lg shadow-2xl"
             alt=""
           />
-          <h1 className="text-2xl font-bold">{part?.name}</h1>
+          <h1 className="text-2xl text-center font-bold">{part?.name}</h1>
+          <h3 className="text-3xl font-bold font-mono text-center pt-4">
+            Price: <span className="text-warning">{part?.price}$</span>
+          </h3>
           <p className="py-6">{part?.description}</p>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl">
