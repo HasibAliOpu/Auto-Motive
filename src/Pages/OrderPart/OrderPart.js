@@ -1,10 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import Loading from "../../Loading/Loading";
 
 const OrderPart = () => {
-  const [part, setPart] = useState();
   const { id } = useParams();
   const {
     register,
@@ -12,12 +13,10 @@ const OrderPart = () => {
     handleSubmit,
     reset,
   } = useForm();
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(`http://localhost:5000/parts/${id}`);
-      setPart(data);
-    })();
-  }, [id]);
+
+  const { data: part, isLoading } = useQuery("part", () =>
+    fetch(`http://localhost:5000/parts/${id}`).then((res) => res.json())
+  );
 
   const onSubmit = async (data) => {
     let quantity = data.quantity;
@@ -26,17 +25,18 @@ const OrderPart = () => {
     }
     quantity = part?.availableQuantity - quantity;
     const newQuantity = { availableQuantity: quantity };
-
     const { data: newAvailableQ } = await axios.put(
       `http://localhost:5000/parts/${id}`,
       newQuantity
     );
-
     if (newAvailableQ.modifiedCount > 0) {
       alert("your order ar booked");
     }
-    console.log(newAvailableQ);
+    reset();
   };
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="hero min-h-screen">
@@ -173,8 +173,8 @@ const OrderPart = () => {
                       message: "Quantity is Required",
                     },
                     min: {
-                      value: 50,
-                      message: "Please Order minimum 50 pieces",
+                      value: part.minimumQuantity,
+                      message: `Please Order minimum ${part.minimumQuantity} pieces`,
                     },
                   })}
                 />

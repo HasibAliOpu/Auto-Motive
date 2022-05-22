@@ -18,7 +18,7 @@ const BusinessSummary = () => {
           src="https://i.ibb.co/JznYpK4/laptop-computer.png"
           alt=""
         />
-        <h3 className="text-4xl text-error font-bold pt-2">250+</h3>
+        <h3 className="text-4xl text-error font-bold pt-2">650+</h3>
         <p className="font-bold text-secondary ">Complete Projects</p>
       </div>
       <div>
@@ -27,7 +27,7 @@ const BusinessSummary = () => {
           src="https://i.ibb.co/F0pPrKf/people.png"
           alt=""
         />
-        <h3 className="text-4xl text-error font-bold  pt-2">130+</h3>
+        <h3 className="text-4xl text-error font-bold  pt-2">235+</h3>
         <p className="font-bold text-secondary ">Happy Clients</p>
       </div>
       <div>

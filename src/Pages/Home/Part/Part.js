@@ -23,7 +23,7 @@ const Part = ({ part }) => {
         <p className="text-2xl">
           Price: <span className="text-warning">{price}$</span>
         </p>
-        <p>{description}</p>
+        <p>{description.slice(0, 250)}...</p>
         <p className="font-bold">Available Quantity: {availableQuantity}</p>
         <p className="font-bold">Minimum Quantity: {minimumQuantity}</p>
         <div className="card-actions justify-center">
