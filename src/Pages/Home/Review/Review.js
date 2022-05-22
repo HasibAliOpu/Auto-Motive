@@ -14,6 +14,34 @@ const Review = ({ review }) => {
           <div>
             <h2 className="card-title">{name}</h2>
             <p>{reviews}</p>
+            <div class="rating rating-sm">
+              <input
+                type="radio"
+                name="rating-5"
+                class="mask mask-star-2 bg-orange-400"
+              />
+              <input
+                type="radio"
+                name="rating-5"
+                class="mask mask-star-2 bg-orange-400"
+                checked
+              />
+              <input
+                type="radio"
+                name="rating-5"
+                class="mask mask-star-2 bg-orange-400"
+              />
+              <input
+                type="radio"
+                name="rating-5"
+                class="mask mask-star-2 bg-orange-400"
+              />
+              <input
+                type="radio"
+                name="rating-5"
+                class="mask mask-star-2 bg-orange-400"
+              />
+            </div>
           </div>
         </div>
       </div>
