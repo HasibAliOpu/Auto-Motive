@@ -4,13 +4,13 @@ import { Link, NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <>
-      <div class="navbar bg-primary">
-        <div class="navbar-start">
-          <div class="dropdown">
-            <label tabindex="0" class="btn btn-ghost lg:hidden">
+      <div className="navbar bg-primary">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <label tabindex="0" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -25,7 +25,7 @@ const Navbar = () => {
             </label>
             <ul
               tabindex="0"
-              class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
                 <NavLink to="/">Home</NavLink>
@@ -36,12 +36,12 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <Link to="/" class="btn btn-ghost normal-case text-xl">
+          <Link to="/" className="text-white text-2xl">
             Automotive parts
           </Link>
         </div>
-        <div class="navbar-end hidden lg:flex">
-          <ul class="menu menu-horizontal p-0">
+        <div className="navbar-end hidden lg:flex">
+          <ul className="menu menu-horizontal p-0">
             <li>
               <NavLink to="/">Home</NavLink>
             </li>

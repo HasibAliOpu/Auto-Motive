@@ -6,7 +6,7 @@ import Navbar from "./Shared/Navbar/Navbar";
 
 function App() {
   return (
-    <div>
+    <div className="text-black">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
