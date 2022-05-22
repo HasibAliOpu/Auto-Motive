@@ -1,19 +1,24 @@
 import React from "react";
 
-const Part = () => {
+const Part = ({ part }) => {
+  const { img, name, description, price, availableQuantity, minimumQuantity } =
+    part;
   return (
-    <div class="card card-compact max-w-md bg-base-100 shadow-xl">
+    <div className="card card-compact max-w-md bg-base-100 shadow-xl">
       <figure>
-        <img
-          src="https://api.lorem.space/image/shoes?w=400&h=225"
-          alt="Shoes"
-        />
+        <img src={img} alt="car parts" />
       </figure>
-      <div class="card-body">
-        <h2 class="card-title">Shoes!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary">Buy Now</button>
+      <div className="card-body">
+        <h2 className="card-title">{name}</h2>
+
+        <p className="text-2xl">
+          Price: <span className="text-warning">{price}$</span>
+        </p>
+        <p>{description}</p>
+        <p className="font-bold">Available Quantity: {availableQuantity}</p>
+        <p className="font-bold">Minimum Quantity: {minimumQuantity}</p>
+        <div className="card-actions justify-center">
+          <button className="btn btn-primary text-white">buy Now</button>
         </div>
       </div>
     </div>
