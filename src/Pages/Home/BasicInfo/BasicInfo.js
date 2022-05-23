@@ -2,7 +2,7 @@ import React from "react";
 
 const BasicInfo = () => {
   return (
-    <div className="grid grid-cols-4 m-10 p-5 shadow-2xl">
+    <div className="grid grid-cols-4 m-10 p-10 rounded-xl shadow-2xl shadow-orange-100">
       <div className="flex items-center gap-3">
         <div className="w-20">
           <img

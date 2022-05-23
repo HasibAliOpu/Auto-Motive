@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 
-const OrderPart = () => {
+const Purchase = () => {
   const { id } = useParams();
   const {
     register,
@@ -165,7 +165,9 @@ const OrderPart = () => {
               <div className="form-control">
                 <input
                   type="number"
-                  placeholder="Part Quantity"
+                  placeholder="Parts Quantity"
+                  // value=
+                  defaultValue={part.minimumQuantity}
                   className="input input-bordered border-primary"
                   {...register("quantity", {
                     required: {
@@ -193,7 +195,9 @@ const OrderPart = () => {
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn btn-primary">order now!</button>
+                <button className="btn btn-primary text-white">
+                  purchase now !
+                </button>
               </div>
             </div>
           </form>
@@ -203,4 +207,4 @@ const OrderPart = () => {
   );
 };
 
-export default OrderPart;
+export default Purchase;

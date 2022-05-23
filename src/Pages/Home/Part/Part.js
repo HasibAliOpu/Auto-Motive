@@ -31,7 +31,7 @@ const Part = ({ part }) => {
             onClick={() => navigate(`/parts/${_id}`)}
             className="btn btn-primary text-white"
           >
-            buy Now
+            Purchase
           </button>
         </div>
       </div>
