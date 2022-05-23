@@ -34,6 +34,9 @@ const Navbar = () => {
               <li>
                 <NavLink to="/blogs">Blogs</NavLink>
               </li>
+              <li>
+                <NavLink to="/login">Login</NavLink>
+              </li>
             </ul>
           </div>
           <Link to="/" className="text-white text-2xl">
@@ -48,6 +51,9 @@ const Navbar = () => {
 
             <li>
               <NavLink to="/blogs">Blogs</NavLink>
+            </li>
+            <li>
+              <NavLink to="/Login">Login</NavLink>
             </li>
           </ul>
         </div>
