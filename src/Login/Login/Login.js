@@ -1,8 +1,8 @@
-import { async } from "@firebase/util";
 import React from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import auth from "../../firebase.init";
+import ResetModal from "../../Modal/ResetModal";
 
 const Login = () => {
   const {
@@ -99,12 +99,13 @@ const Login = () => {
                       >
                         Password
                       </label>
-                      <button
+                      <label
+                        htmlFor="reset-modal"
                         onClick={resetPassword}
                         className="text-sm text-gray-700 hover:text-blue-500 hover:underline"
                       >
                         Forgot password?
-                      </button>
+                      </label>
                     </div>
 
                     <input
@@ -159,6 +160,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <ResetModal></ResetModal>
     </div>
   );
 };

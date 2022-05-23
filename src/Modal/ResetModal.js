@@ -3,21 +3,21 @@ import React from "react";
 const ResetModal = () => {
   return (
     <div>
-      <input type="checkbox" id="my-modal-6" class="modal-toggle" />
-      <div class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box">
-          <h3 class="font-bold text-lg">
-            Congratulations random Interner user!
-          </h3>
-          <p class="py-4">
-            You've been selected for a chance to get one year of subscription to
-            use Wikipedia for free!
-          </p>
-          <div class="modal-action">
-            <label for="my-modal-6" class="btn">
-              Yay!
-            </label>
-          </div>
+      <input type="checkbox" id="reset-modal" className="modal-toggle" />
+      <div className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <label
+            for="reset-modal"
+            className="btn btn-sm btn-circle btn-primary text-white absolute right-2 top-2"
+          >
+            ✕
+          </label>
+          <input
+            type="email"
+            placeholder="Your Email"
+            className="input input-bordered input-primary w-full max-w-xs"
+          />
+          <button className="btn btn-outline btn-primary ml-1">Send</button>
         </div>
       </div>
     </div>
