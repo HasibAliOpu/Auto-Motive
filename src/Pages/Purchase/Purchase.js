@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const Purchase = () => {
+  const [user] = useAuthState(auth);
   const { id } = useParams();
   const {
     register,
@@ -25,14 +28,26 @@ const Purchase = () => {
     }
     quantity = part?.availableQuantity - quantity;
     const newQuantity = { availableQuantity: quantity };
-    const { data: newAvailableQ } = await axios.put(
-      `http://localhost:5000/parts/${id}`,
-      newQuantity
+    await axios.put(`http://localhost:5000/parts/${id}`, newQuantity);
+    const order = {
+      partId: part._id,
+      partName: part.name,
+      price: part.price,
+      name: user.displayName,
+      email: user.email,
+      address: data.address,
+      phone: data.phone,
+      quantity: data.quantity,
+    };
+    const { data: orderRes } = await axios.post(
+      `http://localhost:5000/order`,
+      order
     );
-    if (newAvailableQ.modifiedCount > 0) {
-      alert("your order ar booked");
+    console.log(orderRes);
+    if (orderRes.insertedId) {
+      alert("your order booked");
+      reset();
     }
-    reset();
   };
   if (isLoading) {
     return <Loading />;
@@ -58,51 +73,27 @@ const Purchase = () => {
             <div className="card-body">
               <div className="text-center">
                 <h1 className="text-xl text-blue-400 font-bold">
-                  Available-Quantity: {part?.availableQuantity} pieces
+                  Available Parts: {part?.availableQuantity} pieces
                 </h1>
                 <h1 className="text-md text-orange-400 font-bold">
-                  minimum order Quantity: {part?.minimumQuantity} pieces
+                  minimum order : {part?.minimumQuantity} pieces
                 </h1>
               </div>
               <div className="form-control">
                 <input
                   type="text"
-                  placeholder="Your Name"
-                  className="input input-bordered border-primary"
-                  {...register("name", {
-                    required: {
-                      value: true,
-                      message: "Name is Required",
-                    },
-                  })}
+                  value={user?.displayName}
+                  disabled
+                  className="input input-bordered border-primary mb-1"
                 />
-                <label className="label">
-                  {errors.name?.type === "required" && (
-                    <span className="label-text-alt text-red-500">
-                      {errors.name.message}
-                    </span>
-                  )}
-                </label>
               </div>
               <div className="form-control">
                 <input
                   type="email"
-                  placeholder="Email"
-                  className="input input-bordered border-primary"
-                  {...register("email", {
-                    required: {
-                      value: true,
-                      message: "Email is Required",
-                    },
-                  })}
+                  value={user?.email}
+                  disabled
+                  className="input input-bordered border-primary mb-1"
                 />
-                <label className="label">
-                  {errors.email?.type === "required" && (
-                    <span className="label-text-alt text-red-500">
-                      {errors.email.message}
-                    </span>
-                  )}
-                </label>
               </div>
               <div className="form-control">
                 <input
