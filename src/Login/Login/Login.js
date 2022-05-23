@@ -40,7 +40,7 @@ const Login = () => {
                 <form>
                   <div>
                     <label
-                      for="email"
+                      htmlFor="email"
                       className="block mb-2 text-sm text-gray-600"
                     >
                       Email Address
@@ -56,7 +56,10 @@ const Login = () => {
 
                   <div className="mt-6">
                     <div className="flex justify-between mb-2">
-                      <label for="password" className="text-sm text-gray-600  ">
+                      <label
+                        htmlFor="password"
+                        className="text-sm text-gray-600  "
+                      >
                         Password
                       </label>
                       <Link

@@ -1,16 +1,37 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import Loading from "../../Loading/Loading";
 
 const Register = () => {
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+
+  // onSubmit for form data
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
   };
+
+  if (loading || gLoading) {
+    return <Loading />;
+  }
+  if (error || gError) {
+    console.log(error, gError);
+  }
+  if (user || gUser) {
+    console.log(user, gUser);
+  }
   return (
     <div className="w-full lg:w-1/2 my-10 mx-auto bg-sky-200 p-5 rounded-lg shadow-2xl">
       <h3 className="py-4 text-4xl font-serif text-blue-600 text-center">
@@ -44,8 +65,8 @@ const Register = () => {
           </div>
           <div>
             <label
+              htmlFor="email"
               className="block mb-2 text-sm font-bold text-gray-700"
-              for="email"
             >
               Email
             </label>
@@ -80,7 +101,7 @@ const Register = () => {
             <div className="mb-4 md:mr-2 md:mb-0">
               <label
                 className="block mb-2 text-sm font-bold text-gray-700"
-                for="password"
+                htmlFor="password"
               >
                 Password
               </label>
@@ -139,7 +160,10 @@ const Register = () => {
             <span className="w-1/5 border-b border-gray-800 lg:w-1/4"></span>
           </div>
         </form>
-        <button className="w-full flex items-center justify-center gap-2 mt-4 py-2 font-bold transition-colors duration-200 transform border rounded-lg  hover:bg-warning ">
+        <button
+          onClick={() => signInWithGoogle()}
+          className="w-full flex items-center justify-center gap-2 mt-4 py-2 font-bold transition-colors duration-200 transform border rounded-lg  hover:bg-warning "
+        >
           <span>
             <img src="https://i.ibb.co/SrwFy83/google.png" alt="" />
           </span>
