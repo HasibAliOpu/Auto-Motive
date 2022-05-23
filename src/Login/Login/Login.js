@@ -1,7 +1,12 @@
 import React from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
+import Loading from "../../Loading/Loading";
 import ResetModal from "../../Modal/ResetModal";
 
 const Login = () => {
@@ -16,6 +21,13 @@ const Login = () => {
   const onSubmit = async (data) => {
     signInWithEmailAndPassword(data.email, data.password);
   };
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    console.log(error);
+  }
 
   return (
     <div>
@@ -141,16 +153,33 @@ const Login = () => {
                     />
                   </div>
                 </form>
-
-                <p className="mt-6 text-sm text-center text-gray-400">
+                <p className="mt-6 text- text-center ">
                   Don't have an account yet?{" "}
-                  <button
+                  <Link
                     to="/register"
                     className="text-blue-500 focus:outline-none focus:underline hover:underline"
                   >
-                    Register Now !
-                  </button>
+                    Register Now!
+                  </Link>
                 </p>
+                <div className="flex items-center justify-between mt-4">
+                  <span className="w-1/5 border-b border-gray-800 lg:w-1/4"></span>
+
+                  <span className="text-sm text-center font-mono  uppercase">
+                    or login with Google
+                  </span>
+
+                  <span className="w-1/5 border-b border-gray-800 lg:w-1/4"></span>
+                </div>
+                <button
+                  onClick={() => signInWithGoogle()}
+                  className="w-full flex items-center justify-center gap-2 mt-4 py-2 font-bold bg-white duration-200 transform rounded-lg hover:text-white  hover:bg-amber-300 hover:drop-shadow-2xl"
+                >
+                  <span>
+                    <img src="https://i.ibb.co/SrwFy83/google.png" alt="" />
+                  </span>
+                  <span>Sign in with Google</span>
+                </button>
               </div>
             </div>
           </div>
