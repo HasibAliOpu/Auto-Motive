@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
@@ -10,6 +10,9 @@ import auth from "../../firebase.init";
 import Loading from "../../Loading/Loading";
 
 const Register = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -34,7 +37,7 @@ const Register = () => {
     console.log(error, gError, UpError);
   }
   if (user || gUser) {
-    console.log(user, gUser);
+    navigate(from, { replace: true });
   }
   return (
     <div className="w-full lg:w-1/2 my-10 mx-auto bg-sky-200 p-5 rounded-lg shadow-2xl">
@@ -166,7 +169,7 @@ const Register = () => {
         </form>
         <button
           onClick={() => signInWithGoogle()}
-          className="w-full flex items-center justify-center gap-2 mt-4 py-2 font-bold transition-colors duration-200 transform border rounded-lg  hover:bg-warning "
+          className="w-full flex items-center justify-center gap-2 mt-4 py-2 font-bold transition-colors duration-200 transform border rounded-lg  hover:bg-warning shadow  hover:drop-shadow-2xl "
         >
           <span>
             <img src="https://i.ibb.co/SrwFy83/google.png" alt="" />

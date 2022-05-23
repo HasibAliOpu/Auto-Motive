@@ -4,12 +4,15 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "../../Loading/Loading";
 import ResetModal from "../../Modal/ResetModal";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     formState: { errors },
@@ -27,6 +30,9 @@ const Login = () => {
   }
   if (error) {
     console.log(error);
+  }
+  if (user || gUser) {
+    navigate(from, { replace: true });
   }
 
   return (
