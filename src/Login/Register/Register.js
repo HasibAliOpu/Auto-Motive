@@ -38,10 +38,10 @@ const Register = () => {
   }
   return (
     <div className="w-full lg:w-1/2 my-10 mx-auto bg-sky-200 p-5 rounded-lg shadow-2xl">
-      <h3 className="py-4 text-4xl font-serif text-blue-600 text-center">
+      <h3 className="py-4 text-4xl font-serif text-blue-500 text-center">
         Create an Account!
       </h3>
-      <div className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-xl">
+      <div className="px-8 pt-6 pb-8 mx-6 mb-4 bg-white rounded shadow-xl">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <div className="mb-4 md:mr-2 md:mb-0">

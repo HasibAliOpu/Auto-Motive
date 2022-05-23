@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar bg-primary">
+      <div className="navbar bg-violet-500 text-lg  text-slate-300 font-bold">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -40,7 +40,16 @@ const Navbar = () => {
                 <NavLink to="/blogs">Blogs</NavLink>
               </li>
               <li>
-                <NavLink to="/login">Login</NavLink>
+                {user ? (
+                  <button onClick={() => signOut(auth)} className="text-bold">
+                    LogOut
+                  </button>
+                ) : (
+                  <NavLink to="/Login">Login</NavLink>
+                )}
+              </li>
+              <li>
+                <span>{user ? user?.displayName : ""}</span>
               </li>
             </ul>
           </div>
@@ -59,7 +68,10 @@ const Navbar = () => {
             </li>
             <li>
               {user ? (
-                <button onClick={() => signOut(auth)} className="">
+                <button
+                  onClick={() => signOut(auth)}
+                  className="font-bold  shadow-lg "
+                >
                   LogOut
                 </button>
               ) : (

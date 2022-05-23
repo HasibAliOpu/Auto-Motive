@@ -1,7 +1,25 @@
+import { async } from "@firebase/util";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useForm } from "react-hook-form";
+import auth from "../../firebase.init";
 
 const Login = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
+  const onSubmit = async (data) => {
+    signInWithEmailAndPassword(data.email, data.password);
+  };
+  const resetPassword = () => {
+    console.log("reset");
+  };
+
   return (
     <div>
       <div className="bg-amber-300">
@@ -37,63 +55,104 @@ const Login = () => {
               </div>
 
               <div className="mt-8">
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <div>
                     <label
                       htmlFor="email"
-                      className="block mb-2 text-sm text-gray-600"
+                      className="block mb-2 font-bold text-gray-700"
                     >
                       Email Address
                     </label>
                     <input
                       type="email"
-                      name="email"
-                      id="email"
-                      placeholder="example@example.com"
                       className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  first-line:focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                      {...register("email", {
+                        required: {
+                          value: true,
+                          message: "Email is Required",
+                        },
+                        pattern: {
+                          value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                          message: "Provide a valid Email",
+                        },
+                      })}
                     />
+                    <label className="label">
+                      {errors.email?.type === "required" && (
+                        <span className="label-text-alt text-red-500">
+                          {errors.email.message}
+                        </span>
+                      )}
+                      {errors.email?.type === "pattern" && (
+                        <span className="label-text-alt text-red-500">
+                          {errors.email.message}
+                        </span>
+                      )}
+                    </label>
                   </div>
 
-                  <div className="mt-6">
+                  <div>
                     <div className="flex justify-between mb-2">
                       <label
                         htmlFor="password"
-                        className="text-sm text-gray-600  "
+                        className="font-bold text-gray-600  "
                       >
                         Password
                       </label>
-                      <Link
-                        to="/"
-                        className="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline"
+                      <button
+                        onClick={resetPassword}
+                        className="text-sm text-gray-700 hover:text-blue-500 hover:underline"
                       >
                         Forgot password?
-                      </Link>
+                      </button>
                     </div>
 
                     <input
                       type="password"
-                      name="password"
-                      id="password"
-                      placeholder="Your Password"
                       className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                      {...register("password", {
+                        required: {
+                          value: true,
+                          message: "Password is Required",
+                        },
+                        minLength: {
+                          value: 8,
+                          message: "Must be 8 characters or longer",
+                        },
+                      })}
                     />
+
+                    <label className="label">
+                      {errors.password?.type === "required" && (
+                        <span className="label-text-alt text-red-500">
+                          {errors.password.message}
+                        </span>
+                      )}
+                      {errors.password?.type === "minLength" && (
+                        <span className="label-text-alt text-red-500">
+                          {errors.password.message}
+                        </span>
+                      )}
+                    </label>
                   </div>
 
-                  <div className="mt-6">
-                    <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                      Sign in
-                    </button>
+                  <div className="mt-2">
+                    <input
+                      type="submit"
+                      value="Sign In"
+                      className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                    />
                   </div>
                 </form>
 
                 <p className="mt-6 text-sm text-center text-gray-400">
                   Don't have an account yet?{" "}
-                  <Link
+                  <button
                     to="/register"
                     className="text-blue-500 focus:outline-none focus:underline hover:underline"
                   >
                     Register Now !
-                  </Link>
+                  </button>
                 </p>
               </div>
             </div>
