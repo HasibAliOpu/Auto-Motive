@@ -16,9 +16,6 @@ const Login = () => {
   const onSubmit = async (data) => {
     signInWithEmailAndPassword(data.email, data.password);
   };
-  const resetPassword = () => {
-    console.log("reset");
-  };
 
   return (
     <div>
@@ -101,7 +98,6 @@ const Login = () => {
                       </label>
                       <label
                         htmlFor="reset-modal"
-                        onClick={resetPassword}
                         className="text-sm text-gray-700 hover:text-blue-500 hover:underline"
                       >
                         Forgot password?
