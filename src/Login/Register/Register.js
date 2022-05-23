@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../../Loading/Loading";
@@ -12,6 +13,7 @@ const Register = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+  const [updateProfile, updating, UpError] = useUpdateProfile(auth);
   const {
     register,
     formState: { errors },
@@ -21,13 +23,15 @@ const Register = () => {
   // onSubmit for form data
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+    alert("Updated profile");
   };
 
-  if (loading || gLoading) {
+  if (loading || gLoading || updating) {
     return <Loading />;
   }
-  if (error || gError) {
-    console.log(error, gError);
+  if (error || gError || UpError) {
+    console.log(error, gError, UpError);
   }
   if (user || gUser) {
     console.log(user, gUser);
