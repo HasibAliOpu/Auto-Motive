@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar bg-violet-500 text-lg  text-slate-300 font-bold">
+      <div className="navbar bg-violet-500 text-lg  text-slate-700 font-bold">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -39,9 +39,14 @@ const Navbar = () => {
               <li>
                 <NavLink to="/blogs">Blogs</NavLink>
               </li>
+              {user && (
+                <li>
+                  <NavLink to="/dashboard">Dashboard</NavLink>
+                </li>
+              )}
               <li>
                 {user ? (
-                  <button onClick={() => signOut(auth)} className="text-bold">
+                  <button onClick={() => signOut(auth)} className="font-bold">
                     LogOut
                   </button>
                 ) : (
@@ -66,6 +71,11 @@ const Navbar = () => {
             <li>
               <NavLink to="/blogs">Blogs</NavLink>
             </li>
+            {user && (
+              <li>
+                <NavLink to="/dashboard">Dashboard</NavLink>
+              </li>
+            )}
             <li>
               {user ? (
                 <button
