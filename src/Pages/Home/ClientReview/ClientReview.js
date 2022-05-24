@@ -1,33 +1,11 @@
 import React from "react";
+import { useQuery } from "react-query";
 import Review from "../Review/Review";
 
 const ClientReview = () => {
-  const reviews = [
-    {
-      id: 1,
-      name: "winson Herry",
-      address: "California",
-      img: "https://api.lorem.space/image/face?hash=88560",
-      reviews:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam cum saepe nesciunt! Eaque expedita deleniti odio iusto, obcaecati magni ipsam repudiandae placeat nam earum eum nobis, impedit neque iure omnis?",
-    },
-    {
-      id: 2,
-      name: "Eva Wilson",
-      address: "8732 Fairview St",
-      img: "https://api.lorem.space/image/face?hash=26448",
-      reviews:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam cum saepe nesciunt! Eaque expedita deleniti odio iusto, obcaecati magni ipsam repudiandae placeat nam earum eum nobis, impedit neque iure omnis?",
-    },
-    {
-      id: 3,
-      name: "Melinda Kelly",
-      address: "4179 W Sherman Dr",
-      img: "https://api.lorem.space/image/face?hash=28212",
-      reviews:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam cum saepe nesciunt! Eaque expedita deleniti odio iusto, obcaecati magni ipsam repudiandae placeat nam earum eum nobis, impedit neque iure omnis?",
-    },
-  ];
+  const { data: reviews } = useQuery("reviews", () =>
+    fetch("http://localhost:5000/review").then((res) => res.json())
+  );
 
   return (
     <div>
@@ -35,8 +13,8 @@ const ClientReview = () => {
         What People Think About us!
       </h1>
       <div className="grid grid-cols-3 gap-5 my-10 mx-8">
-        {reviews.map((review) => (
-          <Review key={review.id} review={review} />
+        {reviews?.slice(0, 3).map((review) => (
+          <Review key={review._id} reviews={review} />
         ))}
       </div>
     </div>
