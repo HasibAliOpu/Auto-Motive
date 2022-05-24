@@ -16,8 +16,6 @@ const Banner = () => {
             <h1 className="mb-5 text-6xl font-bold uppercase">
               find parts that can perfect fit on your car
             </h1>
-
-            <button className="btn btn-primary">Get Started</button>
           </div>
         </div>
       </div>

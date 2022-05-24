@@ -14,11 +14,11 @@ const DeleteModal = (url, refetch) => {
   swalWithBootstrapButtons
     .fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "You won't be able to Cancel this Order!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel!",
+      confirmButtonText: "Yes, Cancel it!",
+      cancelButtonText: "No",
     })
     .then((result) => {
       if (result.isConfirmed) {
@@ -27,8 +27,8 @@ const DeleteModal = (url, refetch) => {
           method: "DELETE",
         });
         swalWithBootstrapButtons.fire(
-          "Deleted!",
-          "Your file has been deleted.",
+          "Cancelled!",
+          "Your order has been Cancelled.",
           "success"
         );
         refetch();
@@ -37,9 +37,9 @@ const DeleteModal = (url, refetch) => {
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(
-          "Cancelled",
-          "Your imaginary file is safe :)",
-          "error"
+          "Order not Cancelled!",
+          "Your order is safe :)",
+          "info"
         );
       }
     });

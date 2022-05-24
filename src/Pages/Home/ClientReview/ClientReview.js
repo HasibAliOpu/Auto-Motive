@@ -9,11 +9,11 @@ const ClientReview = () => {
 
   return (
     <div>
-      <h1 className="text-center text-4xl text-accent font-mono">
+      <h1 className="text-center text-4xl text-info font-mono">
         What People Think About us!
       </h1>
       <div className="grid grid-cols-3 gap-5 my-10 mx-8">
-        {reviews?.slice(0, 3).map((review) => (
+        {reviews?.slice(0, 6).map((review) => (
           <Review key={review._id} reviews={review} />
         ))}
       </div>

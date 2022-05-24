@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
@@ -12,6 +12,7 @@ const Purchase = () => {
   const [user] = useAuthState(auth);
   const { id } = useParams();
   const [Toast] = CustomToast();
+  const [part, setPart] = useState({});
   const {
     register,
     formState: { errors },
@@ -19,9 +20,11 @@ const Purchase = () => {
     reset,
   } = useForm();
 
-  const { data: part, isLoading } = useQuery("part", () =>
-    fetch(`http://localhost:5000/parts/${id}`).then((res) => res.json())
-  );
+  useEffect(() => {
+    fetch(`http://localhost:5000/parts/${id}`)
+      .then((res) => res.json())
+      .then((data) => setPart(data));
+  }, [id]);
 
   const onSubmit = async (data) => {
     let quantity = data.quantity;
@@ -57,9 +60,9 @@ const Purchase = () => {
       reset();
     }
   };
-  if (isLoading) {
-    return <Loading />;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   return (
     <div className="hero min-h-screen">
