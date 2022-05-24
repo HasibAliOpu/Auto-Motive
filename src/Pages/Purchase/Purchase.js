@@ -6,10 +6,12 @@ import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import CustomToast from "../../Modal/CustomToast";
 
 const Purchase = () => {
   const [user] = useAuthState(auth);
   const { id } = useParams();
+  const [Toast] = CustomToast();
   const {
     register,
     formState: { errors },
@@ -24,7 +26,10 @@ const Purchase = () => {
   const onSubmit = async (data) => {
     let quantity = data.quantity;
     if (quantity > part?.availableQuantity) {
-      return alert("out of stock");
+      return Toast.fire({
+        icon: "error",
+        title: "Out of stock",
+      });
     }
     quantity = part?.availableQuantity - quantity;
     const newQuantity = { availableQuantity: quantity };
@@ -45,7 +50,10 @@ const Purchase = () => {
     );
     console.log(orderRes);
     if (orderRes.insertedId) {
-      alert("your order booked");
+      Toast.fire({
+        icon: "success",
+        title: "Order is booked successfully",
+      });
       reset();
     }
   };

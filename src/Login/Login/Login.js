@@ -7,9 +7,11 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "../../Loading/Loading";
+import CustomToast from "../../Modal/CustomToast";
 import ResetModal from "../../Modal/ResetModal";
 
 const Login = () => {
+  const [Toast] = CustomToast();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -28,8 +30,11 @@ const Login = () => {
   if (loading) {
     return <Loading />;
   }
-  if (error) {
-    console.log(error);
+  if (error || gError) {
+    Toast.fire({
+      icon: "error",
+      title: gError || error,
+    });
   }
   if (user || gUser) {
     navigate(from, { replace: true });

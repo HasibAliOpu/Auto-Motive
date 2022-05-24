@@ -8,8 +8,10 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../../Loading/Loading";
+import CustomToast from "../../Modal/CustomToast";
 
 const Register = () => {
+  const [Toast] = CustomToast();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -27,14 +29,16 @@ const Register = () => {
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
-    alert("Updated profile");
   };
 
   if (loading || gLoading || updating) {
     return <Loading />;
   }
   if (error || gError || UpError) {
-    console.log(error, gError, UpError);
+    Toast.fire({
+      icon: "error",
+      title: error || gError || UpError,
+    });
   }
   if (user || gUser) {
     navigate(from, { replace: true });
