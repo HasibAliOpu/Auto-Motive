@@ -54,7 +54,7 @@ const AddReview = () => {
     return <Loading />;
   }
   return (
-    <div>
+    <div className="w-1/2 mx-auto">
       <h1 className="text-center py-4 text-xl text-primary font-bold">
         Add A Review !
       </h1>
