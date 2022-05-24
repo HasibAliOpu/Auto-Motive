@@ -1,21 +1,49 @@
+import axios from "axios";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
+import CustomToast from "../../Modal/CustomToast";
 
 const AddProfile = () => {
+  const [Toast] = CustomToast();
   const [user] = useAuthState(auth);
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const profileInfo = {
+      name: user.displayName,
+      email: user.email,
+      education: data.education,
+      district: data.district,
+      city: data.city,
+      linkedin: data.linkedin,
+      github: data.github,
+      phone: data.phone,
+    };
+    const { data: response } = await axios.post(
+      "http://localhost:5000/myProfile",
+      profileInfo
+    );
+    if (!response.insertedId) {
+      Toast.fire({
+        icon: "error",
+        title: "Something was Wrong! Please try again",
+      });
+    }
+    Toast.fire({
+      icon: "success",
+      title: "Your Profile was added",
+    });
+    reset();
+    // console.log(response);
   };
   return (
-    <div className="w-full lg:w-1/2  my-10 mx-auto ">
+    <div className="w-full lg:w-1/2  my-10 mx-auto">
       <div className=" bg-sky-200 p-5 rounded-lg shadow-2xl">
         <h3 className="py-4 text-4xl font-serif text-blue-500 text-center">
           Add Your Profile!!

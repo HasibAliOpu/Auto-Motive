@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -31,15 +31,19 @@ const Register = () => {
     await updateProfile({ displayName: data.name });
   };
 
+  useEffect(() => {
+    if (error || gError || UpError) {
+      Toast.fire({
+        icon: "error",
+        title: error || gError || UpError,
+      });
+    }
+  }, [Toast, error, gError, UpError]);
+
   if (loading || gLoading || updating) {
     return <Loading />;
   }
-  if (error || gError || UpError) {
-    Toast.fire({
-      icon: "error",
-      title: error || gError || UpError,
-    });
-  }
+
   if (user || gUser) {
     navigate(from, { replace: true });
   }

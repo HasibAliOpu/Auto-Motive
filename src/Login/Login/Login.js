@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
@@ -27,15 +27,20 @@ const Login = () => {
     signInWithEmailAndPassword(data.email, data.password);
   };
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
+  useEffect(() => {
+    if (error || gError) {
+      Toast.fire({
+        icon: "error",
+        title: gError || error,
+      });
+    }
+  }, [error, gError, Toast]);
+
   if (loading) {
     return <Loading />;
   }
-  if (error || gError) {
-    Toast.fire({
-      icon: "error",
-      title: gError || error,
-    });
-  }
+
   if (user || gUser) {
     navigate(from, { replace: true });
   }
