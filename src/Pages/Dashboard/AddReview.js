@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { async } from "@firebase/util";
 import axios from "axios";
+import Loading from "../../Loading/Loading";
 
 const AddReview = () => {
+  const [process, setProcess] = useState(false);
   const [user] = useAuthState(auth);
   const {
     register,
@@ -21,7 +22,7 @@ const AddReview = () => {
   const onSubmit = (data) => {
     const image = data.image[0];
     formData.append("image", image);
-
+    setProcess(true);
     const url = `https://api.imgbb.com/1/upload?key=${imageSecretKey}`;
     fetch(url, {
       method: "POST",
@@ -44,10 +45,14 @@ const AddReview = () => {
             );
             console.log(imgRes);
           })();
+          setProcess(false);
           reset();
         }
       });
   };
+  if (process) {
+    return <Loading />;
+  }
   return (
     <div>
       <h1 className="text-center py-4 text-xl text-primary font-bold">

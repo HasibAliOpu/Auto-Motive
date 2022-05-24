@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import DeleteModal from "../../Modal/DeleteModal.js/DeleteModal";
 
-const OrderRow = ({ order }) => {
-  const { name, partName, price, quantity } = order;
+const OrderRow = ({ order, refetch }) => {
+  const { _id, name, partName, price, quantity, paid } = order;
+  const handleDeleteOrder = () => {
+    const url = `http://localhost:5000/order/${_id}`;
+
+    DeleteModal(url, refetch);
+  };
   return (
     <>
       <tr className=" border-b  hover:bg-gray-200 ">
@@ -17,12 +23,23 @@ const OrderRow = ({ order }) => {
         <td className="px-6 py-4">{quantity}</td>
 
         <td className="px-6 py-4 text-right">
-          <Link
-            to="/dashboard"
-            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          >
-            Paid
-          </Link>
+          {!paid && (
+            <>
+              <button onClick={handleDeleteOrder} className="btn btn-xs mr-1">
+                Cancel
+              </button>
+              <Link to="/">
+                <button className="btn btn-xs bg-red-500 border-none text-white">
+                  Pay
+                </button>
+              </Link>
+            </>
+          )}
+          {paid && (
+            <span className="btn btn-xs bg-green-500 border-none text-white">
+              Paid
+            </span>
+          )}
         </td>
       </tr>
     </>

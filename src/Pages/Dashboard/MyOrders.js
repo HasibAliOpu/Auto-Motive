@@ -1,12 +1,19 @@
 import React from "react";
 import { useQuery } from "react-query";
 import OrderRow from "./OrderRow";
+import Loading from "../../Loading/Loading";
 
 const MyOrders = () => {
-  const { data: orders } = useQuery("orders", () =>
+  const {
+    data: orders,
+    isLoading,
+    refetch,
+  } = useQuery("orders", () =>
     fetch("http://localhost:5000/order").then((res) => res.json())
   );
-
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-10">
       <table className="w-full text-sm text-left text-gray-500 ">
@@ -31,7 +38,7 @@ const MyOrders = () => {
         </thead>
         <tbody className="text-black ">
           {orders?.map((order) => (
-            <OrderRow key={order._id} order={order} />
+            <OrderRow key={order._id} order={order} refetch={refetch} />
           ))}
         </tbody>
       </table>
