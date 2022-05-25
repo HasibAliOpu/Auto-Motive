@@ -6,8 +6,11 @@ import CustomToast from "../../Modal/CustomToast";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const UpdateProfile = () => {
+  const [user] = useAuthState(auth);
   const { id } = useParams();
   const [Toast] = CustomToast();
 
@@ -28,8 +31,8 @@ const UpdateProfile = () => {
 
   const onSubmit = async (data) => {
     const profileInfo = {
-      name: data.name,
-      email: data.email,
+      name: user.displayName,
+      email: user.email,
       education: data.education,
       district: data.district,
       city: data.city,
@@ -68,11 +71,10 @@ const UpdateProfile = () => {
   }
   return (
     <div>
-      <h1>Update Your Profile!!</h1>
       <div className="w-full lg:w-1/2  my-10 mx-auto">
-        <div className=" bg-sky-200 p-5 rounded-lg shadow-2xl">
-          <h3 className="py-4 text-4xl font-serif text-blue-500 text-center">
-            Add Your Profile!!
+        <div className=" bg-success p-5 rounded-lg shadow-2xl">
+          <h3 className="py-4 text-4xl font-serif text-white text-center">
+            Update Your Profile!!
           </h3>
           <div className="px-8 pt-6 pb-8 mx-6 mb-4 bg-white rounded shadow-xl">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -84,7 +86,7 @@ const UpdateProfile = () => {
                   type="text"
                   defaultValue={profile.name}
                   className="w-full px-3 py-3 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  {...register("name")}
+                  disabled
                 />
               </div>
               <div>
@@ -98,7 +100,7 @@ const UpdateProfile = () => {
                   type="email"
                   defaultValue={profile.email}
                   className="w-full px-3 py-3 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  {...register("email")}
+                  disabled
                 />
               </div>
               <div className="mb-4 md:mr-2 md:mb-0">
