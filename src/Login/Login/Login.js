@@ -6,6 +6,7 @@ import {
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import useToken from "../../Hooks/useToken";
 import Loading from "../../Loading/Loading";
 import CustomToast from "../../Modal/CustomToast";
 import ResetModal from "../../Modal/ResetModal";
@@ -23,10 +24,12 @@ const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+  const [token] = useToken(user || gUser);
+
   const onSubmit = async (data) => {
     signInWithEmailAndPassword(data.email, data.password);
   };
-  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
   useEffect(() => {
     if (error || gError) {
@@ -37,11 +40,11 @@ const Login = () => {
     }
   }, [error, gError, Toast]);
 
-  if (loading) {
+  if (loading || gLoading) {
     return <Loading />;
   }
 
-  if (user || gUser) {
+  if (token) {
     navigate(from, { replace: true });
   }
 

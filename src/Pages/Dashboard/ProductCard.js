@@ -1,6 +1,7 @@
 import React from "react";
+import DeleteProduct from "../../Modal/DeleteProduct";
 
-const ProductCard = ({ part }) => {
+const ProductCard = ({ part, refetch }) => {
   const {
     _id,
     img,
@@ -10,6 +11,11 @@ const ProductCard = ({ part }) => {
     availableQuantity,
     minimumQuantity,
   } = part;
+  const handleDeleteProduct = () => {
+    const url = `http://localhost:5000/parts/${_id}`;
+
+    DeleteProduct(url, refetch);
+  };
   return (
     <div className="card card-compact max-w-md bg-base-100 shadow-xl">
       <figure>
@@ -25,7 +31,12 @@ const ProductCard = ({ part }) => {
         <p className="font-bold">Available Quantity: {availableQuantity}</p>
         <p className="font-bold">Minimum Quantity: {minimumQuantity}</p>
         <div className="card-actions justify-center">
-          <button className="btn btn-primary text-white">Purchase</button>
+          <button
+            onClick={handleDeleteProduct}
+            className="btn bg-red-600 border-none text-white"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>

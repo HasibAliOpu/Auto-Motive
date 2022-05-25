@@ -9,6 +9,7 @@ import {
 import auth from "../../firebase.init";
 import Loading from "../../Loading/Loading";
 import CustomToast from "../../Modal/CustomToast";
+import useToken from "../../Hooks/useToken";
 
 const Register = () => {
   const [Toast] = CustomToast();
@@ -24,7 +25,7 @@ const Register = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-
+  const [token] = useToken(user || gUser);
   // onSubmit for form data
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
@@ -44,7 +45,7 @@ const Register = () => {
     return <Loading />;
   }
 
-  if (user || gUser) {
+  if (token) {
     navigate(from, { replace: true });
   }
   return (

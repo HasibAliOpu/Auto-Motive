@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DeleteModal from "../../Modal/DeleteModal.js/DeleteModal";
+import DeleteOrder from "../../Modal/DeleteOrder";
 
 const OrderRow = ({ order, refetch }) => {
   const { _id, name, partName, price, quantity, paid } = order;
   const handleDeleteOrder = () => {
     const url = `http://localhost:5000/order/${_id}`;
 
-    DeleteModal(url, refetch);
+    DeleteOrder(url, refetch);
   };
   return (
     <>

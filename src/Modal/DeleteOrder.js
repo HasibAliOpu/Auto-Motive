@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-const DeleteModal = (url, refetch) => {
+const DeleteOrder = (url, refetch) => {
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
       confirmButton:
@@ -45,4 +45,4 @@ const DeleteModal = (url, refetch) => {
     });
 };
 
-export default DeleteModal;
+export default DeleteOrder;
