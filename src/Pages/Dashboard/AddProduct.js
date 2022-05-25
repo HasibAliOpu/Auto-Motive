@@ -1,8 +1,11 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Loading from "../../Loading/Loading";
+import CustomToast from "../../Modal/CustomToast";
 
 const AddProduct = () => {
+  const [Toast] = CustomToast();
   const [process, setProcess] = useState(false);
 
   const {
@@ -16,7 +19,6 @@ const AddProduct = () => {
   const formData = new FormData();
 
   const onSubmit = (data) => {
-    console.log(data);
     const image = data.image[0];
     formData.append("image", image);
     setProcess(true);
@@ -37,13 +39,25 @@ const AddProduct = () => {
             minimumQuantity: data.minimumQuantity,
             description: data.description,
           };
-          console.log(product);
+
+          (async () => {
+            const { data: response } = await axios.post(
+              "http://localhost:5000/parts",
+              product
+            );
+            Toast.fire({
+              icon: "success",
+              title: response.message,
+            });
+          })();
+          setProcess(false);
+          reset();
         }
       });
   };
-  // if (process) {
-  //   return <Loading />;
-  // }
+  if (process) {
+    return <Loading />;
+  }
   return (
     <div className="w-1/2 mx-auto mb-10">
       <h1 className="text-center py-4 text-xl text-primary font-bold">
