@@ -20,7 +20,11 @@ const Purchase = () => {
   } = useForm();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/parts/${id}`)
+    fetch(`http://localhost:5000/parts/${id}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setPart(data));
   }, [id, updating]);

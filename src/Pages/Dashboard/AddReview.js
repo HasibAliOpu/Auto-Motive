@@ -43,7 +43,7 @@ const AddReview = () => {
               "http://localhost:5000/review",
               review
             );
-            console.log(imgRes);
+
           })();
           setProcess(false);
           reset();

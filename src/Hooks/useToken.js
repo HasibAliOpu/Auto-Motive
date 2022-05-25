@@ -12,7 +12,7 @@ const useToken = (user) => {
           `http://localhost:5000/user/${email}`,
           currentUser
         );
-        console.log(data);
+
         const accessToken = data.token;
         localStorage.setItem("accessToken", accessToken);
         setToken(accessToken);

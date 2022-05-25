@@ -50,7 +50,6 @@ const UpdateProfile = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (!data.success) {
           Toast.fire({
             icon: "error",

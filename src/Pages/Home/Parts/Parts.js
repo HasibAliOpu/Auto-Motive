@@ -7,7 +7,11 @@ const Parts = () => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get("http://localhost:5000/parts");
+      const { data } = await axios.get("http://localhost:5000/parts", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       setParts(data);
     })();
   }, []);

@@ -4,18 +4,31 @@ import OrderRow from "./OrderRow";
 import Loading from "../../Loading/Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const MyOrders = () => {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   const {
     data: orders,
     isLoading,
     refetch,
   } = useQuery("orders", () =>
-    fetch(`http://localhost:5000/order?email=${user.email}`).then((res) =>
-      res.json()
-    )
+    fetch(`http://localhost:5000/order?email=${user.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => {
+      if (res.status === 401 || res.status === 403) {
+        signOut(auth);
+        localStorage.removeItem("accessToken");
+        navigate("/");
+      }
+      return res.json();
+    })
   );
+
   if (isLoading) {
     return <Loading />;
   }
