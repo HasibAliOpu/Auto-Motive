@@ -1,9 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import Loading from "../../Loading/Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import CustomToast from "../../Modal/CustomToast";
@@ -13,6 +11,7 @@ const Purchase = () => {
   const { id } = useParams();
   const [Toast] = CustomToast();
   const [part, setPart] = useState({});
+  const [updating, setUpdating] = useState(true);
   const {
     register,
     formState: { errors },
@@ -24,14 +23,14 @@ const Purchase = () => {
     fetch(`http://localhost:5000/parts/${id}`)
       .then((res) => res.json())
       .then((data) => setPart(data));
-  }, [id]);
+  }, [id, updating]);
 
   const onSubmit = async (data) => {
     let quantity = data.quantity;
     if (quantity > part?.availableQuantity) {
       return Toast.fire({
         icon: "error",
-        title: "Out of stock",
+        title: "Sorry! please order lower or equal of available pieces",
       });
     }
     quantity = part?.availableQuantity - quantity;
@@ -55,14 +54,12 @@ const Purchase = () => {
     if (orderRes.insertedId) {
       Toast.fire({
         icon: "success",
-        title: "Order is booked successfully",
+        title: "Order is booked, please go dashboard and pay it!",
       });
+      setUpdating(!updating);
       reset();
     }
   };
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
 
   return (
     <div className="hero min-h-screen">

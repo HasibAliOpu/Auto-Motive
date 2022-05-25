@@ -45,10 +45,17 @@ const AddProduct = () => {
               "http://localhost:5000/parts",
               product
             );
-            Toast.fire({
-              icon: "success",
-              title: response.message,
-            });
+            if (!response.success) {
+              Toast.fire({
+                icon: "error",
+                title: "Something was Wrong, please try again",
+              });
+            } else {
+              Toast.fire({
+                icon: "success",
+                title: response.message,
+              });
+            }
           })();
           setProcess(false);
           reset();
