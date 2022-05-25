@@ -42,7 +42,7 @@ function App() {
           <Route path="addReview" element={<AddReview />} />
           <Route path="myProfile" element={<MyProfile />} />
           <Route path="addProfile" element={<AddProfile />} />
-          <Route path="updateProfile" element={<UpdateProfile />} />
+          <Route path="updateProfile/:id" element={<UpdateProfile />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

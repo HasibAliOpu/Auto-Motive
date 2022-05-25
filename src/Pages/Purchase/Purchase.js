@@ -51,7 +51,7 @@ const Purchase = () => {
       `http://localhost:5000/order`,
       order
     );
-    console.log(orderRes);
+
     if (orderRes.insertedId) {
       Toast.fire({
         icon: "success",

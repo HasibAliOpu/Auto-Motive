@@ -40,7 +40,6 @@ const AddProfile = () => {
       title: "Your Profile was added",
     });
     reset();
-    // console.log(response);
   };
   return (
     <div className="w-full lg:w-1/2  my-10 mx-auto">

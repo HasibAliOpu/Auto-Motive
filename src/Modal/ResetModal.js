@@ -21,7 +21,10 @@ const ResetModal = () => {
     return <Loading />;
   }
   if (error) {
-    console.log(error);
+    Toast.fire({
+      icon: "error",
+      title: error,
+    });
   }
   return (
     <div>

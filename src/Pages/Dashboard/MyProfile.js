@@ -13,14 +13,19 @@ const MyProfile = () => {
   }
   return (
     <div>
+      <div className="flex justify-center my-5">
+        <Link
+          to={`/dashboard/addProfile`}
+          className="btn btn-primary text-center"
+        >
+          Add Profile
+        </Link>
+      </div>
       <div className="grid grid-cols-1 mx-10 my-5 gap-5 ">
         {profiles?.map((profile) => (
           <Profile key={profile._id} profile={profile} />
         ))}
       </div>
-      <Link to={`/dashboard/addProfile`} className="btn btn-primary">
-        Add Profile
-      </Link>
     </div>
   );
 };
