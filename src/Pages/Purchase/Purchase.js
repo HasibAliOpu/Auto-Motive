@@ -25,7 +25,7 @@ const Purchase = () => {
     isLoading,
     refetch,
   } = useQuery(["part", id], () =>
-    fetch(`http://localhost:5000/parts/${id}`, {
+    fetch(`https://cryptic-ridge-95940.herokuapp.com/parts/${id}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -42,7 +42,10 @@ const Purchase = () => {
     }
     quantity = part?.availableQuantity - quantity;
     const newQuantity = { availableQuantity: quantity };
-    await axios.put(`http://localhost:5000/parts/${id}`, newQuantity);
+    await axios.put(
+      `https://cryptic-ridge-95940.herokuapp.com/parts/${id}`,
+      newQuantity
+    );
     const order = {
       partId: part._id,
       partName: part.name,
@@ -54,7 +57,7 @@ const Purchase = () => {
       quantity: data.quantity,
     };
     const { data: orderRes } = await axios.post(
-      `http://localhost:5000/order`,
+      `https://cryptic-ridge-95940.herokuapp.com/order`,
       order
     );
 

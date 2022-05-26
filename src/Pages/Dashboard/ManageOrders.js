@@ -15,7 +15,7 @@ const ManageOrders = () => {
     isLoading,
     refetch,
   } = useQuery("orders", () =>
-    fetch(`http://localhost:5000/allOrder`, {
+    fetch(`https://cryptic-ridge-95940.herokuapp.com/allOrder`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

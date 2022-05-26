@@ -9,7 +9,7 @@ const useAdmin = (user) => {
     if (email) {
       (async () => {
         const { data } = await axios.get(
-          `http://localhost:5000/admin/${email}`,
+          `https://cryptic-ridge-95940.herokuapp.com/admin/${email}`,
           {
             headers: {
               authorization: `Bearer ${localStorage.getItem("accessToken")}`,

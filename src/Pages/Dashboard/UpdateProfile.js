@@ -26,7 +26,9 @@ const UpdateProfile = () => {
     isLoading,
     refetch,
   } = useQuery("profile", () =>
-    fetch(`http://localhost:5000/myProfile/${id}`).then((res) => res.json())
+    fetch(`https://cryptic-ridge-95940.herokuapp.com/myProfile/${id}`).then(
+      (res) => res.json()
+    )
   );
 
   const onSubmit = async (data) => {
@@ -41,7 +43,7 @@ const UpdateProfile = () => {
       phone: data.phone,
     };
 
-    fetch(`http://localhost:5000/myProfile/${id}`, {
+    fetch(`https://cryptic-ridge-95940.herokuapp.com/myProfile/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

@@ -20,6 +20,7 @@ import AddProduct from "./Pages/Dashboard/AddProduct";
 import UpdateProfile from "./Pages/Dashboard/UpdateProfile";
 import RequireAdmin from "./Auth/RequireAdmin/RequireAdmin";
 import Payment from "./Pages/Dashboard/Payment";
+import NotFound from "./Pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -85,6 +86,7 @@ function App() {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>

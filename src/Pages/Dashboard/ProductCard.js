@@ -12,7 +12,7 @@ const ProductCard = ({ part, refetch }) => {
     minimumQuantity,
   } = part;
   const handleDeleteProduct = () => {
-    const url = `http://localhost:5000/parts/${_id}`;
+    const url = `https://cryptic-ridge-95940.herokuapp.com/parts/${_id}`;
 
     DeleteProduct(url, refetch);
   };

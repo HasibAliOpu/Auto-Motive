@@ -6,7 +6,9 @@ import Loading from "../../Loading/Loading";
 
 const MyProfile = () => {
   const { data: profiles, isLoading } = useQuery("profileInfo", () =>
-    fetch("http://localhost:5000/myProfile").then((res) => res.json())
+    fetch("https://cryptic-ridge-95940.herokuapp.com/myProfile").then((res) =>
+      res.json()
+    )
   );
   if (isLoading) {
     return <Loading />;
