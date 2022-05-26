@@ -22,7 +22,7 @@ const MyOrders = () => {
     }).then((res) => {
       if (res.status === 401 || res.status === 403) {
         signOut(auth);
-        localStorage.removeItem("accessToken");
+        // localStorage.removeItem("accessToken");
         navigate("/");
       }
       return res.json();

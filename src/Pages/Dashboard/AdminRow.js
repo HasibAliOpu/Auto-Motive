@@ -1,26 +1,44 @@
-import axios from "axios";
 import React from "react";
+import auth from "../../firebase.init";
+import { signOut } from "firebase/auth";
 import CustomToast from "../../Modal/CustomToast";
+import { useNavigate } from "react-router-dom";
+
 const AdminRow = ({ index, user, refetch }) => {
   const { email } = user;
+  const navigate = useNavigate();
+
   const [Toast] = CustomToast();
   const handleMakeAdmin = async () => {
-    const { data } = await axios.put(
-      `http://localhost:5000/user/admin/${email}`,
-      {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    );
-    if (data.modifiedCount > 0) {
-      Toast.fire({
-        icon: "success",
-        title: "Successfully Promoting to Admin",
-      });
-    }
+    fetch(`http://localhost:5000/user/admin/${email}`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 403) {
+          signOut(auth);
+          navigate("/");
+          // if i remove the token, the server was crushed :(
 
-    refetch();
+          // localStorage.removeItem("accessToken");
+          Toast.fire({
+            icon: "error",
+            title: "You're not a admin, you can't make admin anyone!!",
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          Toast.fire({
+            icon: "success",
+            title: "Successfully Promoting to Admin",
+          });
+        }
+        refetch();
+      });
   };
 
   return (
