@@ -1,7 +1,7 @@
-import { async } from "@firebase/util";
 import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
+import Loading from "../../Loading/Loading";
 import CustomToast from "../../Modal/CustomToast";
 import DeleteOrder from "../../Modal/DeleteOrder";
 
