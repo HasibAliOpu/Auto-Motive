@@ -18,6 +18,7 @@ import ManageProducts from "./Pages/Dashboard/ManageProducts";
 import ManageOrders from "./Pages/Dashboard/ManageOrders";
 import AddProduct from "./Pages/Dashboard/AddProduct";
 import UpdateProfile from "./Pages/Dashboard/UpdateProfile";
+import RequireAdmin from "./Auth/RequireAdmin/RequireAdmin";
 
 function App() {
   return (
@@ -46,10 +47,38 @@ function App() {
           <Route path="addReview" element={<AddReview />} />
           <Route path="myProfile" element={<MyProfile />} />
           <Route path="addProfile" element={<AddProfile />} />
-          <Route path="makeAdmin" element={<MakeAdmin />} />
-          <Route path="manageOrders" element={<ManageOrders />} />
-          <Route path="manageProducts" element={<ManageProducts />} />
-          <Route path="addProduct" element={<AddProduct />} />
+          <Route
+            path="makeAdmin"
+            element={
+              <RequireAdmin>
+                <MakeAdmin />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="manageOrders"
+            element={
+              <RequireAdmin>
+                <ManageOrders />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="manageProducts"
+            element={
+              <RequireAdmin>
+                <ManageProducts />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="addProduct"
+            element={
+              <RequireAdmin>
+                <AddProduct />
+              </RequireAdmin>
+            }
+          />
           <Route path="updateProfile/:id" element={<UpdateProfile />} />
         </Route>
         <Route path="/login" element={<Login />} />
