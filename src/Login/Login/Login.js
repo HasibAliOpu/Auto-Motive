@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
@@ -10,9 +10,12 @@ import useToken from "../../Hooks/useToken";
 import Loading from "../../Loading/Loading";
 import CustomToast from "../../Modal/CustomToast";
 import ResetModal from "../../Modal/ResetModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
   const [Toast] = CustomToast();
+  const [eyeOpen, setEyeOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -117,7 +120,7 @@ const Login = () => {
                     </label>
                   </div>
 
-                  <div>
+                  <div className="relative">
                     <div className="flex justify-between mb-2">
                       <label
                         htmlFor="password"
@@ -134,7 +137,7 @@ const Login = () => {
                     </div>
 
                     <input
-                      type="password"
+                      type={eyeOpen ? "text" : "password"}
                       className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                       {...register("password", {
                         required: {
@@ -147,7 +150,16 @@ const Login = () => {
                         },
                       })}
                     />
-
+                    <span
+                      onClick={() => setEyeOpen(!eyeOpen)}
+                      className="absolute top-10 right-3 text-info"
+                    >
+                      {eyeOpen ? (
+                        <FontAwesomeIcon icon={faEye} />
+                      ) : (
+                        <FontAwesomeIcon icon={faEyeSlash} />
+                      )}
+                    </span>
                     <label className="label">
                       {errors.password?.type === "required" && (
                         <span className="label-text-alt text-red-500">
