@@ -19,6 +19,7 @@ import ManageOrders from "./Pages/Dashboard/ManageOrders";
 import AddProduct from "./Pages/Dashboard/AddProduct";
 import UpdateProfile from "./Pages/Dashboard/UpdateProfile";
 import RequireAdmin from "./Auth/RequireAdmin/RequireAdmin";
+import Payment from "./Pages/Dashboard/Payment";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="addReview" element={<AddReview />} />
           <Route path="myProfile" element={<MyProfile />} />
           <Route path="addProfile" element={<AddProfile />} />
+          <Route path="payment/:id" element={<Payment />} />
           <Route
             path="makeAdmin"
             element={

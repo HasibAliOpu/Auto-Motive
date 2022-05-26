@@ -24,13 +24,13 @@ const Dashboard = () => {
             {/* <!-- Sidebar content here --> */}
 
             <li>
+              <Link to="/dashboard/myProfile">My Profile</Link>
+            </li>
+            <li>
               <Link to="/dashboard">My Orders</Link>
             </li>
             <li>
               <Link to="/dashboard/addReview">Add a Review</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/myProfile">My Profile</Link>
             </li>
             {admin && (
               <>
@@ -38,13 +38,13 @@ const Dashboard = () => {
                   <Link to="/dashboard/manageProducts">Manage Products</Link>
                 </li>
                 <li>
+                  <Link to="/dashboard/addProduct">Add Product</Link>
+                </li>
+                <li>
                   <Link to="/dashboard/manageOrders">Manage Orders</Link>
                 </li>
                 <li>
                   <Link to="/dashboard/makeAdmin">Make Admin</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard/addProduct">Add Product</Link>
                 </li>
               </>
             )}

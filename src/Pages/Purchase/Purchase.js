@@ -1,17 +1,18 @@
+import React from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import CustomToast from "../../Modal/CustomToast";
+import { useQuery } from "react-query";
+import Loading from "../../Loading/Loading";
 
 const Purchase = () => {
   const [user] = useAuthState(auth);
   const { id } = useParams();
   const [Toast] = CustomToast();
-  const [part, setPart] = useState({});
-  const [updating, setUpdating] = useState(true);
+
   const {
     register,
     formState: { errors },
@@ -19,15 +20,17 @@ const Purchase = () => {
     reset,
   } = useForm();
 
-  useEffect(() => {
+  const {
+    data: part,
+    isLoading,
+    refetch,
+  } = useQuery(["part", id], () =>
     fetch(`http://localhost:5000/parts/${id}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    })
-      .then((res) => res.json())
-      .then((data) => setPart(data));
-  }, [id, updating]);
+    }).then((res) => res.json())
+  );
 
   const onSubmit = async (data) => {
     let quantity = data.quantity;
@@ -60,10 +63,14 @@ const Purchase = () => {
         icon: "success",
         title: "Order is booked, please go dashboard and pay it!",
       });
-      setUpdating(!updating);
+
       reset();
+      refetch();
     }
   };
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="hero min-h-screen">

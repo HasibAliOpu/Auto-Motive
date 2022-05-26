@@ -32,6 +32,7 @@ const MyOrders = () => {
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg m-10 ">
       <table className="w-full  text-sm text-left text-gray-500 ">
@@ -56,7 +57,12 @@ const MyOrders = () => {
         </thead>
         <tbody className="text-black ">
           {orders?.map((order) => (
-            <OrderRow key={order._id} order={order} refetch={refetch} />
+            <OrderRow
+              key={order._id}
+              order={order}
+              state={false}
+              refetch={refetch}
+            />
           ))}
         </tbody>
       </table>
