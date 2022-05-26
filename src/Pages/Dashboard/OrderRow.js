@@ -10,7 +10,7 @@ const OrderRow = ({ order, refetch, state }) => {
     order;
   const [Toast] = CustomToast();
   const handleDeleteOrder = () => {
-    const url = `https://cryptic-ridge-95940.herokuapp.com/order/${_id}`;
+    const url = `http://localhost:5000/order/${_id}`;
 
     DeleteOrder(url, refetch);
   };
@@ -19,7 +19,7 @@ const OrderRow = ({ order, refetch, state }) => {
       pending: "shipped",
     };
     const { data } = await axios.put(
-      `https://cryptic-ridge-95940.herokuapp.com/order/${_id}`,
+      `http://localhost:5000/order/${_id}`,
       newStatus
     );
     if (data.modifiedCount > 0) {

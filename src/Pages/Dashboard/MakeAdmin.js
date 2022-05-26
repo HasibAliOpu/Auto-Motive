@@ -9,7 +9,7 @@ const MakeAdmin = () => {
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch("https://cryptic-ridge-95940.herokuapp.com/user", {
+    fetch("http://localhost:5000/user", {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

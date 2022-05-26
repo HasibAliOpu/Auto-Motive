@@ -42,7 +42,7 @@ const AddProduct = () => {
 
           (async () => {
             const { data: response } = await axios.post(
-              "https://cryptic-ridge-95940.herokuapp.com/parts",
+              "http://localhost:5000/parts",
               product
             );
             if (!response.success) {

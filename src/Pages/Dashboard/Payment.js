@@ -12,7 +12,7 @@ const Payment = () => {
   );
 
   const { id } = useParams();
-  const url = `https://cryptic-ridge-95940.herokuapp.com/order/${id}`;
+  const url = `http://localhost:5000/order/${id}`;
   const { data: order, isLoading } = useQuery(["order", id], () =>
     fetch(url, {
       headers: {

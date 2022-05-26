@@ -7,14 +7,11 @@ const Parts = () => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(
-        "https://cryptic-ridge-95940.herokuapp.com/parts",
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      );
+      const { data } = await axios.get("http://localhost:5000/parts", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       setParts(data);
     })();
   }, []);

@@ -42,7 +42,7 @@ const AddReview = () => {
           };
           (async () => {
             const { data: response } = await axios.post(
-              "https://cryptic-ridge-95940.herokuapp.com/review",
+              "http://localhost:5000/review",
               review
             );
             if (response.insertedId) {

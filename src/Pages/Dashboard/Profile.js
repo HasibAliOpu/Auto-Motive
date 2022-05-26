@@ -10,6 +10,7 @@ const Profile = ({ profile }) => {
     name,
     email,
     education,
+    image,
     district,
     city,
     linkedin,
@@ -17,7 +18,10 @@ const Profile = ({ profile }) => {
     phone,
   } = profile;
   return (
-    <div className="card bg-sky-300 shadow-xl font-bod text-slate-700 font-serif">
+    <div class="card lg:card-side bg-base-100 shadow-xl">
+      <figure>
+        <img src={image} alt="Album" />
+      </figure>
       <div className="card-body">
         <p>Name: {name}</p>
         <p>Email: {email}</p>

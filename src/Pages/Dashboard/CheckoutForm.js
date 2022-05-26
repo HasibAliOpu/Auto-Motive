@@ -15,7 +15,7 @@ const CheckoutForm = ({ order }) => {
   const { _id, price, email, name } = order;
 
   useEffect(() => {
-    fetch("https://cryptic-ridge-95940.herokuapp.com/create-payment-intent", {
+    fetch("http://localhost:5000/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -84,7 +84,7 @@ const CheckoutForm = ({ order }) => {
         order: _id,
         transactionId: paymentIntent.id,
       };
-      fetch(`https://cryptic-ridge-95940.herokuapp.com/order/${_id}`, {
+      fetch(`http://localhost:5000/order/${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

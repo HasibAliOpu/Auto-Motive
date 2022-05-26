@@ -15,14 +15,11 @@ const MyOrders = () => {
     isLoading,
     refetch,
   } = useQuery("orders", () =>
-    fetch(
-      `https://cryptic-ridge-95940.herokuapp.com/order?email=${user.email}`,
-      {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    ).then((res) => {
+    fetch(`http://localhost:5000/order?email=${user.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => {
       if (res.status === 401 || res.status === 403) {
         signOut(auth);
         // localStorage.removeItem("accessToken");

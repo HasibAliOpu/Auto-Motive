@@ -10,7 +10,7 @@ const AdminRow = ({ index, user, refetch }) => {
 
   const [Toast] = CustomToast();
   const handleMakeAdmin = async () => {
-    fetch(`https://cryptic-ridge-95940.herokuapp.com/user/admin/${email}`, {
+    fetch(`http://localhost:5000/user/admin/${email}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
