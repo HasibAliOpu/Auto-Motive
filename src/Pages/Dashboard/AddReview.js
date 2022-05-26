@@ -4,9 +4,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import axios from "axios";
 import Loading from "../../Loading/Loading";
+import CustomToast from "../../Modal/CustomToast";
 
 const AddReview = () => {
   const [process, setProcess] = useState(false);
+  const [Toast] = CustomToast();
   const [user] = useAuthState(auth);
   const {
     register,
@@ -39,10 +41,17 @@ const AddReview = () => {
             review: data.review,
           };
           (async () => {
-            await axios.post(
+            const { data: response } = await axios.post(
               "https://cryptic-ridge-95940.herokuapp.com/review",
               review
             );
+            if (response.insertedId) {
+              Toast.fire({
+                icon: "success",
+                title: "Your review Added! Thank's for your feedback",
+              });
+            }
+            console.log(response);
           })();
           setProcess(false);
           reset();

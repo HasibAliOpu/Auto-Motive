@@ -16,6 +16,7 @@ const ProductCard = ({ part, refetch }) => {
 
     DeleteProduct(url, refetch);
   };
+  refetch();
   return (
     <div className="card card-compact max-w-md bg-base-100 shadow-xl">
       <figure>

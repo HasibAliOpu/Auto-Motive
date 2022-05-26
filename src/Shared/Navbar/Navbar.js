@@ -86,7 +86,7 @@ const Navbar = () => {
                     signOut(auth);
                     localStorage.removeItem("accessToken");
                   }}
-                  className="font-bold"
+                  className="font-bold text-error"
                 >
                   LogOut
                 </button>
@@ -95,7 +95,9 @@ const Navbar = () => {
               )}
             </li>
             <li>
-              <span>{user ? user?.displayName : ""}</span>
+              <span className="text-blue-500">
+                {user ? user?.displayName : ""}
+              </span>
             </li>
           </ul>
         </div>
