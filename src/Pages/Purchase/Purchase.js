@@ -77,7 +77,7 @@ const Purchase = () => {
 
   return (
     <div className="hero min-h-screen">
-      <div className="hero-content flex-col lg:flex-row">
+      <div className="hero-content flex-col lg:flex-row max-w-sm">
         <div className="text-center lg:text-left">
           <img
             src={part?.img}

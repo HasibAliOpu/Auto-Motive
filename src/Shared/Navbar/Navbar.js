@@ -58,7 +58,7 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <Link to="/" className="text-2xl uppercase">
+          <Link to="/" className="lg:text-2xl uppercase">
             Auto-Motive
           </Link>
         </div>

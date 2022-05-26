@@ -39,7 +39,7 @@ const AddReview = () => {
             review: data.review,
           };
           (async () => {
-            const { data: imgRes } = await axios.post(
+            await axios.post(
               "https://cryptic-ridge-95940.herokuapp.com/review",
               review
             );
@@ -53,11 +53,11 @@ const AddReview = () => {
     return <Loading />;
   }
   return (
-    <div className="w-1/2 mx-auto">
+    <div className="lg:w-1/2 mx-auto">
       <h1 className="text-center py-4 text-xl text-primary font-bold">
         Add A Review !
       </h1>
-      <div className="border rounded p-5 bg-teal-300">
+      <div className="border rounded p-5 bg-teal-300 max-w-sm">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
             <label

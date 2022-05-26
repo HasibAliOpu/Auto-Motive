@@ -5,15 +5,16 @@ const Footer = () => {
   return (
     <footer className="footer p-10 bg-slate-200 text-amber-500">
       <div>
-        <span className="footer-title">Services</span>
+        <span className="footer-title">Contacts</span>
         <Link to="/" className="link link-hover">
-          Branding
+          CARiD.com 1 Corporate Drive Cranbury, NJ 08512
         </Link>
         <Link to="/" className="link link-hover">
-          Design
+          Toll Free: 800.505.3274 International: 1.609.642.4700 Fax:
+          1.609.964.1983
         </Link>
         <Link to="/" className="link link-hover">
-          Marketing
+          Email: auto-motive.com
         </Link>
         <Link to="/" className="link link-hover">
           Advertisement
@@ -48,7 +49,7 @@ const Footer = () => {
       </div>
       <div>
         <span className="footer-title">Newsletter</span>
-        <div className="form-control w-80">
+        <div className="form-control w-full">
           <label className="label">
             <span className="label-text">Enter your email address</span>
           </label>

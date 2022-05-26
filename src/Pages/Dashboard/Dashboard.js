@@ -20,7 +20,7 @@ const Dashboard = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-64 bg-slate-300 text-xl font-mono font-bold">
+          <ul className="menu p-4 overflow-y-auto w-64 bg-[#a2d2ff] text-xl text-[#1d3557] font-mono font-bold">
             {/* <!-- Sidebar content here --> */}
 
             <li>
