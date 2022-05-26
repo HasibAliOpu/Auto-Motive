@@ -53,11 +53,11 @@ const AddReview = () => {
     return <Loading />;
   }
   return (
-    <div className="lg:w-1/2 mx-auto">
+    <div className="w-full lg:w-1/2 my-5 px-4 mx-auto">
       <h1 className="text-center py-4 text-xl text-primary font-bold">
         Add A Review !
       </h1>
-      <div className="border rounded p-5 bg-teal-300 max-w-sm">
+      <div className="border rounded p-5 bg-teal-300">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
             <label

@@ -77,11 +77,11 @@ const Purchase = () => {
 
   return (
     <div className="hero min-h-screen">
-      <div className="hero-content flex-col lg:flex-row max-w-sm">
+      <div className="hero-content flex-col lg:flex-row">
         <div className="text-center lg:text-left">
           <img
             src={part?.img}
-            className="max-w-sm  mx-auto my-5 rounded-lg shadow-2xl"
+            className="w-1/2 mx-auto my-5 rounded-lg shadow-2xl"
             alt=""
           />
           <h1 className="text-2xl text-center font-bold">{part?.name}</h1>
