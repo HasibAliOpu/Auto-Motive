@@ -49,7 +49,7 @@ const Register = () => {
     navigate(from, { replace: true });
   }
   return (
-    <div className="max-w-sm lg:w-1/2 my-10 mx-auto bg-sky-200 p-5 rounded-lg shadow-2xl">
+    <div className="w-full lg:w-2/5 my-10 mx-auto bg-sky-200 p-5 rounded-lg shadow-2xl">
       <h3 className="py-4 text-4xl font-serif text-blue-500 text-center">
         Create an Account!
       </h3>
