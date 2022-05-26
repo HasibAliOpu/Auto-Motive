@@ -51,7 +51,7 @@ const Profile = ({ profile }) => {
         <div className="card-actions justify-end">
           <Link
             to={`/dashboard/updateProfile/${_id}`}
-            className="btn btn-primary text-white font-mono shadow-2xl"
+            className="btn btn-sm btn-info text-white font-mono shadow-2xl"
           >
             update Profile
           </Link>

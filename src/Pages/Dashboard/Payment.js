@@ -27,15 +27,15 @@ const Payment = () => {
 
   return (
     <div>
-      <div className="card w-50 max-w-sm md:max-w-md bg-accent shadow-xl my-12 mx-auto text-center">
+      <div className="card w-50 max-w-sm md:max-w-md bg-accent shadow-xl my-12 mx-auto text-cnter">
         <div className="card-body">
           <p className="text-sky-400 text-xl font-bold">
             Hello, [{order.name}]
           </p>
-          <p className="text-lg  font-bold">
+          <p className="text-lg font-serif">
             You Ordered item:- <span>( {order.partName} )</span>
           </p>
-          <span className="flex font-bold text-green-500">
+          <span className="flex font-bold f text-[#4f5d75] font-mono">
             <p>Per piece: {order.price}$</p>
             <p>You Order: {order.quantity} pieces</p>
           </span>
