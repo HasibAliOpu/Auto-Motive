@@ -14,32 +14,53 @@ const AddProfile = () => {
     handleSubmit,
     reset,
   } = useForm();
+  const imageSecretKey = "0313811f6b27cbd96509e43e7b9addf6";
+  const formData = new FormData();
+
   const onSubmit = async (data) => {
-    const profileInfo = {
-      name: user.displayName,
-      email: user.email,
-      education: data.education,
-      district: data.district,
-      city: data.city,
-      linkedin: data.linkedin,
-      github: data.github,
-      phone: data.phone,
-    };
-    const { data: response } = await axios.post(
-      "http://localhost:5000/myProfile",
-      profileInfo
-    );
-    if (!response.insertedId) {
-      Toast.fire({
-        icon: "error",
-        title: "Something was Wrong! Please try again",
+    const image = data.image[0];
+    formData.append("image", image);
+
+    const url = `https://api.imgbb.com/1/upload?key=${imageSecretKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.success) {
+          const img = result.data.url;
+
+          const profileInfo = {
+            name: user.displayName,
+            email: user.email,
+            education: data.education,
+            image: img,
+            district: data.district,
+            city: data.city,
+            linkedin: data.linkedin,
+            github: data.github,
+            phone: data.phone,
+          };
+          (async () => {
+            const { data: response } = await axios.post(
+              "http://localhost:5000/myProfile",
+              profileInfo
+            );
+            if (!response.insertedId) {
+              Toast.fire({
+                icon: "error",
+                title: "Something was Wrong! Please try again",
+              });
+            }
+            Toast.fire({
+              icon: "success",
+              title: "Your Profile was added",
+            });
+          })();
+          reset();
+        }
       });
-    }
-    Toast.fire({
-      icon: "success",
-      title: "Your Profile was added",
-    });
-    reset();
   };
   return (
     <div className="lg:w-1/2  my-10 mx-3 lg:mx-auto">
@@ -92,6 +113,28 @@ const AddProfile = () => {
                 {errors.education?.type === "required" && (
                   <span className="label-text-alt text-red-500">
                     {errors.education.message}
+                  </span>
+                )}
+              </label>
+            </div>
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-900 ">
+                Upload your photo
+              </label>
+              <input
+                type="file"
+                className="block w-full text-sm py-2 pr-20 pl-1 text-gray-900 shadow-md rounded-lg cursor-pointer bg-gray-50 focus:outline-none "
+                {...register("image", {
+                  required: {
+                    value: true,
+                    message: "Image is Required",
+                  },
+                })}
+              />
+              <label className="label">
+                {errors.image?.type === "required" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.image.message}
                   </span>
                 )}
               </label>

@@ -22,15 +22,32 @@ const Profile = ({ profile }) => {
       <figure>
         <img src={image} alt="Album" />
       </figure>
-      <div className="card-body">
-        <p>Name: {name}</p>
+      <div className="card-body text-center">
+        <p className="text-xl">Name: {name}</p>
         <p>Email: {email}</p>
+        <p>phone: {phone}</p>
         <p>Education: {education}</p>
         <p>District: {district}</p>
         <p>City: {city}</p>
-        <p>Linkedin: {linkedin}</p>
-        <p>Github: {github}</p>
-        <p>phone: {phone}</p>
+
+        <a
+          className="btn btn-link"
+          href="https://www.linkedin.com/in/hasib-ali-opu-7b8886226/"
+          target={"_blank"}
+          rel="noreferrer"
+        >
+          Linkedin: {linkedin}
+        </a>
+
+        <a
+          className="btn btn-link"
+          href="https://github.com/HasibAliOpu"
+          target={"_blank"}
+          rel="noreferrer"
+        >
+          Github: {github}
+        </a>
+
         <div className="card-actions justify-end">
           <Link
             to={`/dashboard/updateProfile/${_id}`}
