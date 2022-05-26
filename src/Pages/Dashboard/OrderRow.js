@@ -1,14 +1,36 @@
+import { async } from "@firebase/util";
+import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
+import CustomToast from "../../Modal/CustomToast";
 import DeleteOrder from "../../Modal/DeleteOrder";
 
 const OrderRow = ({ order, refetch, state }) => {
-  const { _id, name, partName, price, quantity, paid } = order;
+  const { _id, name, partName, price, quantity, paid, status, transactionId } =
+    order;
+  const [Toast] = CustomToast();
   const handleDeleteOrder = () => {
     const url = `http://localhost:5000/order/${_id}`;
 
     DeleteOrder(url, refetch);
   };
+  const handleShipping = async () => {
+    const newStatus = {
+      pending: "shipped",
+    };
+    const { data } = await axios.put(
+      `http://localhost:5000/order/${_id}`,
+      newStatus
+    );
+    if (data.modifiedCount > 0) {
+      Toast.fire({
+        icon: "success",
+        title: "Order Successfully Shipped!",
+      });
+      refetch();
+    }
+  };
+
   return (
     <>
       <tr className=" border-b  hover:bg-gray-200 ">
@@ -23,27 +45,32 @@ const OrderRow = ({ order, refetch, state }) => {
         <td className="px-6 py-4">{quantity}</td>
 
         {state ? (
-          <td className="px-6 py-4 text-right">
+          <td className="px-6 py-4">
             {!paid && (
               <>
-                <button onClick={handleDeleteOrder} className="btn btn-xs mr-1">
-                  bal
-                </button>
+                <button className="btn btn-xs mr-1">unpaid</button>
                 <Link to="/">
-                  <button className="btn btn-xs bg-red-500 border-none text-white">
-                    chal
+                  <button
+                    // onClick={handleDeleteOrder}
+                    className="btn btn-xs bg-red-500 border-none text-white"
+                  >
+                    x
                   </button>
                 </Link>
               </>
             )}
-            {paid && (
-              <span className="btn btn-xs bg-green-500 border-none text-white">
-                Paid
+            {status && (
+              <span
+                onClick={handleShipping}
+                disabled={status === "shipped"}
+                className="btn btn-xs bg-green-500 border-none text-white"
+              >
+                {status}
               </span>
             )}
           </td>
         ) : (
-          <td className="px-6 py-4 text-right">
+          <td className="px-6 py-4 ">
             {!paid && (
               <>
                 <button onClick={handleDeleteOrder} className="btn btn-xs mr-1">
@@ -57,9 +84,17 @@ const OrderRow = ({ order, refetch, state }) => {
               </>
             )}
             {paid && (
-              <span className="btn btn-xs bg-green-500 border-none text-white">
-                Paid
-              </span>
+              <>
+                <span className="btn btn-xs bg-green-500 border-none text-white">
+                  Paid
+                </span>
+                <p className="">
+                  transactionId:{" "}
+                  <span className="badge badge-success text-white ">
+                    {transactionId}
+                  </span>
+                </p>
+              </>
             )}
           </td>
         )}
