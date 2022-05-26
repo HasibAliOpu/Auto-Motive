@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useForm } from "react-hook-form";
 import CustomToast from "../../Modal/CustomToast";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
@@ -11,8 +11,9 @@ import auth from "../../firebase.init";
 const UpdateProfile = () => {
   const [user] = useAuthState(auth);
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const [Toast] = CustomToast();
+  const [process, setProcess] = useState(false);
 
   const {
     register,
@@ -37,7 +38,7 @@ const UpdateProfile = () => {
   const onSubmit = async (data) => {
     const image = data.image[0];
     formData.append("image", image);
-
+    setProcess(!process);
     const url = `https://api.imgbb.com/1/upload?key=${imageSecretKey}`;
     fetch(url, {
       method: "POST",
@@ -75,18 +76,20 @@ const UpdateProfile = () => {
                   title: data.error,
                 });
               } else {
+                setProcess(!process);
                 Toast.fire({
                   icon: "success",
                   title: data.message,
                 });
                 refetch();
                 reset();
+                navigate("/dashboard/myProfile");
               }
             });
         }
       });
   };
-  if (isLoading) {
+  if (isLoading || process) {
     return <Loading />;
   }
   return (

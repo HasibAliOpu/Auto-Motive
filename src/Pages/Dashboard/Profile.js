@@ -32,7 +32,7 @@ const Profile = ({ profile }) => {
 
         <a
           className="btn btn-link"
-          href="https://www.linkedin.com/in/hasib-ali-opu-7b8886226/"
+          href={linkedin}
           target={"_blank"}
           rel="noreferrer"
         >
@@ -41,7 +41,7 @@ const Profile = ({ profile }) => {
 
         <a
           className="btn btn-link"
-          href="https://github.com/HasibAliOpu"
+          href={github}
           target={"_blank"}
           rel="noreferrer"
         >

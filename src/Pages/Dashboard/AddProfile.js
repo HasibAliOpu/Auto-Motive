@@ -1,13 +1,15 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import CustomToast from "../../Modal/CustomToast";
 
 const AddProfile = () => {
   const [Toast] = CustomToast();
   const [user] = useAuthState(auth);
+  const [process, setProcess] = useState(false);
   const {
     register,
     formState: { errors },
@@ -16,11 +18,11 @@ const AddProfile = () => {
   } = useForm();
   const imageSecretKey = "0313811f6b27cbd96509e43e7b9addf6";
   const formData = new FormData();
-
+  const navigate = useNavigate();
   const onSubmit = async (data) => {
     const image = data.image[0];
     formData.append("image", image);
-
+    setProcess(!process);
     const url = `https://api.imgbb.com/1/upload?key=${imageSecretKey}`;
     fetch(url, {
       method: "POST",
@@ -53,10 +55,12 @@ const AddProfile = () => {
                 title: "Something was Wrong! Please try again",
               });
             }
+            setProcess(!process);
             Toast.fire({
               icon: "success",
               title: "Your Profile was added",
             });
+            navigate("/dashboard/myProfile");
           })();
           reset();
         }
