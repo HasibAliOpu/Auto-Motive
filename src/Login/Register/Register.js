@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -10,9 +10,12 @@ import auth from "../../firebase.init";
 import Loading from "../../Loading/Loading";
 import CustomToast from "../../Modal/CustomToast";
 import useToken from "../../Hooks/useToken";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Register = () => {
   const [Toast] = CustomToast();
+  const [eyeOpen, setEyeOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -122,7 +125,7 @@ const Register = () => {
               </label>
             </div>
             <div>
-              <div className="">
+              <div className="relative">
                 <label
                   className="block mb-2 pl-2 text-lg font-mono font-bold text-gray-700"
                   htmlFor="password"
@@ -130,7 +133,7 @@ const Register = () => {
                   Password
                 </label>
                 <input
-                  type="password"
+                  type={eyeOpen ? "text" : "password"}
                   className="w-full px-3 py-3 leading-tight text-gray-700  rounded-full shadow-xl appearance-none focus:outline-none focus:shadow-outline"
                   {...register("password", {
                     required: {
@@ -143,6 +146,16 @@ const Register = () => {
                     },
                   })}
                 />
+                <span
+                  onClick={() => setEyeOpen(!eyeOpen)}
+                  className="absolute top-11 right-5 text-info"
+                >
+                  {eyeOpen ? (
+                    <FontAwesomeIcon icon={faEye} />
+                  ) : (
+                    <FontAwesomeIcon icon={faEyeSlash} />
+                  )}
+                </span>
 
                 <label className="label">
                   {errors.password?.type === "required" && (

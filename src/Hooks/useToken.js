@@ -9,7 +9,7 @@ const useToken = (user) => {
     if (email) {
       (async () => {
         const { data } = await axios.put(
-          `http://localhost:5000/user/${email}`,
+          `https://cryptic-ridge-95940.herokuapp.com/user/${email}`,
           currentUser
         );
 

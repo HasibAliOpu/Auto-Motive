@@ -10,7 +10,9 @@ const ManageProducts = () => {
     isLoading,
     refetch,
   } = useQuery("deletePart", () =>
-    fetch("http://localhost:5000/parts").then((res) => res.json())
+    fetch("https://cryptic-ridge-95940.herokuapp.com/parts").then((res) =>
+      res.json()
+    )
   );
 
   if (isLoading) {

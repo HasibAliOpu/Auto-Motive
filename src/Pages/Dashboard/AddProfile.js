@@ -44,7 +44,7 @@ const AddProfile = () => {
           };
           (async () => {
             const { data: response } = await axios.post(
-              "http://localhost:5000/myProfile",
+              "https://cryptic-ridge-95940.herokuapp.com/myProfile",
               profileInfo
             );
             if (!response.insertedId) {

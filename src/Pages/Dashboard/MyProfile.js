@@ -9,9 +9,9 @@ import auth from "../../firebase.init";
 const MyProfile = () => {
   const [user] = useAuthState(auth);
   const { data: profiles, isLoading } = useQuery("profileInfo", () =>
-    fetch(`http://localhost:5000/myProfile/${user.email}`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://cryptic-ridge-95940.herokuapp.com/myProfile/${user.email}`
+    ).then((res) => res.json())
   );
   console.log(profiles);
   if (isLoading) {

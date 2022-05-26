@@ -4,19 +4,28 @@ const MyPortfolio = () => {
   return (
     <div>
       <section className="text-center">
+        <div class="avatar">
+          <div class="w-2/12 mx-auto my-5 rounded-full ring ring-info ring-offset-base-100 ring-offset-2">
+            <img
+              src="https://i.ibb.co/QN3PMLt/IMG-20220509-173351-edited.jpg"
+              alt=""
+            />
+          </div>
+        </div>
+
         <div className="my-5">
-          <h1 className="text-xl">
+          <h1 className="lg:text-xl">
             Hello! My name is Hasib ali Opu. and i'm junior MERN-Stock Developer
           </h1>
           <h3 className="text-lg py-2">
-            I am skilled in HTML, CSS, Bootstrap, Tailwind(mostly use),
+            I am skilled in HTML, CSS, Bootstrap, Tailwind(mostly used),
             JavaScript, React JS, Node JS, Express JS, Mongo DB, and Firebase
           </h3>
           <p>Recently i start my study on Computer Engineering field</p>
           <p>[wwwhasib4@gmail.com] For Contact you can mail on this Email</p>
         </div>
         <div>
-          <h1 className="text-2xl my-5">
+          <h1 className="lg:text-3xl font-bold text-indigo-400 my-5 uppercase">
             my top 3 Best Project link and some Screenshot!
           </h1>
           <div className="mb-5">
@@ -25,7 +34,7 @@ const MyPortfolio = () => {
                 href="https://tech-world-c48c2.web.app/"
                 target="_blank"
                 rel="noreferrer noopener"
-                class="btn btn-active btn-link"
+                class="btn btn-active btn-link text-lg"
               >
                 Tech World!
               </a>
@@ -52,7 +61,7 @@ const MyPortfolio = () => {
                 href="https://dr-physiologists.web.app/"
                 target="_blank"
                 rel="noreferrer noopener"
-                class="btn btn-active btn-link"
+                class="btn btn-active btn-link text-lg"
               >
                 Dr-Physiologists
               </a>
@@ -79,7 +88,7 @@ const MyPortfolio = () => {
                 href="https://jbl-charge-4.netlify.app/"
                 target="_blank"
                 rel="noreferrer noopener"
-                class="btn btn-active btn-link"
+                class="btn btn-active btn-link text-lg"
               >
                 JBL-Charge-4
               </a>
