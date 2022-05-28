@@ -20,7 +20,7 @@ const Register = () => {
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const [updateProfile, updating, UpError] = useUpdateProfile(auth);
   const {
