@@ -24,12 +24,23 @@ const Part = ({ part }) => {
           Price: <span className="text-warning">{price}$</span>
         </p>
         <p>{description.slice(0, 250)}...</p>
-        <p className="font-bold">Available Quantity: {availableQuantity}</p>
-        <p className="font-bold">Minimum Quantity: {minimumQuantity}</p>
+        {availableQuantity === 0 ? (
+          <>
+            <h1 className="text-4xl font-bold text-center pb-10 text-red-500">
+              Out Of Stock
+            </h1>
+          </>
+        ) : (
+          <>
+            <p className="font-bold">Available Quantity: {availableQuantity}</p>
+            <p className="font-bold">Minimum Quantity: {minimumQuantity}</p>
+          </>
+        )}
         <div className="card-actions justify-center">
           <button
             onClick={() => navigate(`/parts/${_id}`)}
-            className="btn btn-primary text-white"
+            className="btn btn-primary text-white w-full"
+            disabled={availableQuantity === 0}
           >
             Purchase
           </button>

@@ -90,7 +90,9 @@ const Purchase = () => {
           <h3 className="text-3xl font-bold font-mono text-center pt-4">
             Price: <span className="text-warning">{part?.price}$</span>
           </h3>
-          <p className="py-6">{part?.description}</p>
+          <div className="py-6 px-2">
+            <p className="text-lg">{part?.description}</p>
+          </div>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl">
           <form onSubmit={handleSubmit(onSubmit)}>
