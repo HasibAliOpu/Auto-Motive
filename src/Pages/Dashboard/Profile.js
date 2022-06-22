@@ -18,7 +18,7 @@ const Profile = ({ profile }) => {
     phone,
   } = profile;
   return (
-    <div class="card lg:card-side bg-base-100 shadow-xl">
+    <div className="card lg:card-side bg-base-100 shadow-xl">
       <figure>
         <img src={image} alt="Album" />
       </figure>

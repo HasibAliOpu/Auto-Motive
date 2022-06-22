@@ -7,9 +7,11 @@ import auth from "../../firebase.init";
 import CustomToast from "../../Modal/CustomToast";
 import { useQuery } from "react-query";
 import Loading from "../../Loading/Loading";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Purchase = () => {
   const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user);
   const { id } = useParams();
   const [Toast] = CustomToast();
 
@@ -208,8 +210,8 @@ const Purchase = () => {
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn btn-primary text-white">
-                  purchase now !
+                <button disabled={admin} className="btn btn-primary text-white">
+                  {admin ? `admin can't purchase` : "purchase now !"}
                 </button>
               </div>
             </div>

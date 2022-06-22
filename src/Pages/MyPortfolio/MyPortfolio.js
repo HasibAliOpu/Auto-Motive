@@ -4,8 +4,8 @@ const MyPortfolio = () => {
   return (
     <div>
       <section className="text-center">
-        <div class="avatar">
-          <div class="w-2/12 mx-auto my-5 rounded-full ring ring-info ring-offset-base-100 ring-offset-2">
+        <div className="avatar">
+          <div className="w-2/12 mx-auto my-5 rounded-full ring ring-info ring-offset-base-100 ring-offset-2">
             <img
               src="https://i.ibb.co/QN3PMLt/IMG-20220509-173351-edited.jpg"
               alt=""
@@ -34,7 +34,7 @@ const MyPortfolio = () => {
                 href="https://tech-world-c48c2.web.app/"
                 target="_blank"
                 rel="noreferrer noopener"
-                class="btn btn-active btn-link text-lg"
+                className="btn btn-active btn-link text-lg"
               >
                 Tech World!
               </a>
@@ -61,7 +61,7 @@ const MyPortfolio = () => {
                 href="https://dr-physiologists.web.app/"
                 target="_blank"
                 rel="noreferrer noopener"
-                class="btn btn-active btn-link text-lg"
+                className="btn btn-active btn-link text-lg"
               >
                 Dr-Physiologists
               </a>
@@ -88,7 +88,7 @@ const MyPortfolio = () => {
                 href="https://jbl-charge-4.netlify.app/"
                 target="_blank"
                 rel="noreferrer noopener"
-                class="btn btn-active btn-link text-lg"
+                className="btn btn-active btn-link text-lg"
               >
                 JBL-Charge-4
               </a>
