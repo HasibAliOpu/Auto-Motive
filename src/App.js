@@ -22,6 +22,7 @@ import RequireAdmin from "./Auth/RequireAdmin/RequireAdmin";
 import Payment from "./Pages/Dashboard/Payment";
 import NotFound from "./Pages/NotFound/NotFound";
 import MyPortfolio from "./Pages/MyPortfolio/MyPortfolio";
+import ManageReview from "./Pages/Dashboard/ManageReview/ManageReview";
 
 function App() {
   return (
@@ -80,6 +81,14 @@ function App() {
             element={
               <RequireAdmin>
                 <AddProduct />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="manageReviews"
+            element={
+              <RequireAdmin>
+                <ManageReview />
               </RequireAdmin>
             }
           />
