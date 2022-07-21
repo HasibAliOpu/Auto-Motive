@@ -26,12 +26,12 @@ const DeleteReview = (_id, refetch) => {
         fetch(` https://cryptic-ridge-95940.herokuapp.com/review/${_id}`, {
           method: "DELETE",
         });
+        refetch();
         swalWithBootstrapButtons.fire(
           "Deleted!",
           "Product has been Deleted.",
           "success"
         );
-        refetch();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         swalWithBootstrapButtons.fire(
           "Product not Deleted!",

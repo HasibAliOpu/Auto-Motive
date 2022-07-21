@@ -1,13 +1,17 @@
 import React from "react";
+import Loading from "../../../Loading/Loading";
 import DeleteReview from "../../../Modal/DeleteReview";
 
-const Review = ({ MgReview, refetch }) => {
+const Review = ({ MgReview, refetch, isLoading }) => {
   const { _id, image, name, review, rating } = MgReview;
 
   const handleDeleteReview = (_id) => {
     console.log(_id);
     DeleteReview(_id, refetch);
   };
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="card max-w-md shadow-xl">
       <div className="card-body">
