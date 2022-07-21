@@ -1,8 +1,13 @@
 import React from "react";
+import DeleteReview from "../../../Modal/DeleteReview";
 
-const Review = ({ MgReview }) => {
-  console.log(MgReview);
-  const { image, name, review, rating } = MgReview;
+const Review = ({ MgReview, refetch }) => {
+  const { _id, image, name, review, rating } = MgReview;
+
+  const handleDeleteReview = (_id) => {
+    console.log(_id);
+    DeleteReview(_id, refetch);
+  };
   return (
     <div className="card max-w-md shadow-xl">
       <div className="card-body">
@@ -25,8 +30,13 @@ const Review = ({ MgReview }) => {
             </span>
           </p>
         </div>
-        <div class="flex justify-center items-center">
-          <button class="btn text-white border-none  bg-red-600">Remove</button>
+        <div className="flex justify-center items-center">
+          <button
+            onClick={() => handleDeleteReview(_id)}
+            className="btn text-white border-none  bg-red-500 hover:bg-red-700 ease-in-out duration-300"
+          >
+            Remove
+          </button>
         </div>
       </div>
     </div>

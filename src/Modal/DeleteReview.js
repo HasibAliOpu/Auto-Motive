@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-const DeleteModal = (url, refetch) => {
+const DeleteReview = (_id, refetch) => {
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
       confirmButton:
@@ -23,7 +23,7 @@ const DeleteModal = (url, refetch) => {
     .then((result) => {
       if (result.isConfirmed) {
         // fetch for delete part
-        fetch(url, {
+        fetch(`http://localhost:5000/review/${_id}`, {
           method: "DELETE",
         });
         swalWithBootstrapButtons.fire(
@@ -42,4 +42,4 @@ const DeleteModal = (url, refetch) => {
     });
 };
 
-export default DeleteModal;
+export default DeleteReview;
