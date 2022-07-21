@@ -8,7 +8,9 @@ const ManageReview = () => {
     isLoading,
     refetch,
   } = useQuery("reviews", () =>
-    fetch("http://localhost:5000/review").then((data) => data.json())
+    fetch("https://cryptic-ridge-95940.herokuapp.com/review").then((data) =>
+      data.json()
+    )
   );
 
   return (

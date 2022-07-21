@@ -23,7 +23,7 @@ const DeleteReview = (_id, refetch) => {
     .then((result) => {
       if (result.isConfirmed) {
         // fetch for delete part
-        fetch(`http://localhost:5000/review/${_id}`, {
+        fetch(` https://cryptic-ridge-95940.herokuapp.com/review/${_id}`, {
           method: "DELETE",
         });
         swalWithBootstrapButtons.fire(
