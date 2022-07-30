@@ -13,7 +13,7 @@ const MyProfile = () => {
       `https://cryptic-ridge-95940.herokuapp.com/myProfile/${user.email}`
     ).then((res) => res.json())
   );
-  console.log(profiles);
+
   if (isLoading) {
     return <Loading />;
   }

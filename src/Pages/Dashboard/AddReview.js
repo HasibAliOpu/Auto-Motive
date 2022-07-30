@@ -51,7 +51,6 @@ const AddReview = () => {
                 title: "Your review Added! Thank's for your feedback",
               });
             }
-            console.log(response);
           })();
           setProcess(false);
           reset();

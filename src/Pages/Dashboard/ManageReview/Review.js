@@ -6,7 +6,6 @@ const Review = ({ MgReview, refetch, isLoading }) => {
   const { _id, image, name, review, rating } = MgReview;
 
   const handleDeleteReview = (_id) => {
-    console.log(_id);
     DeleteReview(_id, refetch);
   };
   if (isLoading) {

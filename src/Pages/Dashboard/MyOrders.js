@@ -58,7 +58,7 @@ const MyOrders = () => {
             </th>
           </tr>
         </thead>
-        <tbody className="text-black ">
+        <tbody className="text-black">
           {orders?.map((order) => (
             <OrderRow
               key={order._id}
