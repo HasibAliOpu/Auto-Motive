@@ -48,7 +48,7 @@ const AddReview = () => {
             if (response.insertedId) {
               Toast.fire({
                 icon: "success",
-                title: "Your review Added! Thank's for your feedback",
+                title: "Your review Added! Thank's for your feedback.",
               });
             }
           })();
