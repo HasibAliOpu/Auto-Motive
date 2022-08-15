@@ -1,19 +1,21 @@
 import React from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import CustomToast from "../../Modal/CustomToast";
 import { useQuery } from "react-query";
 import Loading from "../../Loading/Loading";
 import useAdmin from "../../Hooks/useAdmin";
+import { signOut } from "firebase/auth";
 
 const Purchase = () => {
   const [user] = useAuthState(auth);
   const [admin] = useAdmin(user);
   const { id } = useParams();
   const [Toast] = CustomToast();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -31,7 +33,14 @@ const Purchase = () => {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    }).then((res) => res.json())
+    }).then((res) => {
+      if (res.status === 401 || res.status === 403) {
+        localStorage.removeItem("accessToken");
+        signOut(auth);
+        navigate("/");
+      }
+      return res.json();
+    })
   );
 
   const onSubmit = async (data) => {
